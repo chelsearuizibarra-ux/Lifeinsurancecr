@@ -34,7 +34,7 @@ document.querySelectorAll('input[name="phone"]').forEach(el => {
   el.addEventListener('input', () => formatPhone(el));
 });
 
-// --- Age calculation helper ---
+// --- Age auto-calculation from date of birth ---
 function calcAge(dob) {
   if (!dob) return '';
   const birth = new Date(dob);
@@ -42,33 +42,115 @@ function calcAge(dob) {
   let age = today.getFullYear() - birth.getFullYear();
   const m = today.getMonth() - birth.getMonth();
   if (m < 0 || (m === 0 && today.getDate() < birth.getDate())) age--;
-  return age;
+  return age >= 0 ? age : '';
 }
 
-// --- Build payload for GHL ---
+const clientDob = document.getElementById('client_dob');
+const clientAge = document.getElementById('client_age');
+const spouseDob = document.getElementById('spouse_dob');
+const spouseAge = document.getElementById('spouse_age');
+
+if (clientDob && clientAge) {
+  clientDob.addEventListener('change', () => {
+    const age = calcAge(clientDob.value);
+    if (age !== '') clientAge.value = age;
+  });
+}
+
+if (spouseDob && spouseAge) {
+  spouseDob.addEventListener('change', () => {
+    const age = calcAge(spouseDob.value);
+    if (age !== '') spouseAge.value = age;
+  });
+}
+
+// --- Show/hide children ages field ---
+document.querySelectorAll('input[name="has_children"]').forEach(radio => {
+  radio.addEventListener('change', () => {
+    const field = document.getElementById('children_ages_field');
+    if (field) field.hidden = radio.value !== 'yes';
+  });
+});
+
+// --- Build medical concerns list from checkboxes ---
+function getMedicalConcerns(form, prefix) {
+  const conditions = [];
+  const map = {
+    hbp: 'High Blood Pressure',
+    heart_attack: 'Heart Attack',
+    stroke: 'Stroke',
+    cancer: 'Cancer',
+    diabetes: 'Diabetes',
+    cholesterol: 'High Cholesterol',
+    dui: 'DUI/Substance Abuse',
+    surgery: 'Surgeries or Diseases',
+    accidents: 'Accidents (Past 10 Years)',
+  };
+  for (const [key, label] of Object.entries(map)) {
+    const el = form.querySelector(`input[name="${prefix}_${key}"]`);
+    if (el && el.checked) conditions.push(label);
+  }
+  return conditions.join(', ') || 'None';
+}
+
+// --- Build GHL payload ---
 function buildPayload(form) {
   const fd = new FormData(form);
-  const tobacco = fd.get('tobacco') || fd.get('tobacco_b') || 'no';
-  const dob = fd.get('dateOfBirth') || '';
-
-  const smsConsent = form.querySelector('.sms-checkbox');
+  const smsEl = form.querySelector('.sms-checkbox');
 
   return {
-    firstName:      fd.get('firstName') || '',
-    lastName:       fd.get('lastName') || '',
-    email:          fd.get('email') || '',
-    phone:          fd.get('phone') || '',
-    dateOfBirth:    dob,
-    age:            calcAge(dob),
-    gender:         fd.get('gender') || '',
-    coverageAmount: fd.get('coverageAmount') || '',
-    coverageType:   fd.get('coverageType') || '',
-    tobaccoUser:    tobacco,
-    smsConsent:     smsConsent && smsConsent.checked ? 'yes' : 'no',
-    smsConsentTimestamp: smsConsent && smsConsent.checked ? new Date().toISOString() : '',
-    source:         'lifeinsurancecr.com',
-    formLocation:   form.dataset.form || 'unknown',
-    submittedAt:    new Date().toISOString(),
+    // Contact
+    email:                fd.get('email') || '',
+    phone:                fd.get('phone') || '',
+
+    // Client general info
+    clientName:           fd.get('client_name') || '',
+    clientDOB:            fd.get('client_dob') || '',
+    clientAge:            fd.get('client_age') || '',
+    clientHeight:         fd.get('client_height') || '',
+    clientWeight:         fd.get('client_weight') || '',
+    clientSmoker:         fd.get('client_smoker') || 'no',
+
+    // Spouse general info
+    spouseName:           fd.get('spouse_name') || '',
+    spouseDOB:            fd.get('spouse_dob') || '',
+    spouseAge:            fd.get('spouse_age') || '',
+    spouseHeight:         fd.get('spouse_height') || '',
+    spouseWeight:         fd.get('spouse_weight') || '',
+    spouseSmoker:         fd.get('spouse_smoker') || 'no',
+
+    // Medical concerns
+    clientMedicalConcerns: getMedicalConcerns(form, 'client'),
+    spouseMedicalConcerns: getMedicalConcerns(form, 'spouse'),
+
+    // Medications
+    clientMedications:    fd.get('client_medications') || '',
+    spouseMedications:    fd.get('spouse_medications') || '',
+
+    // Mortgage
+    mortgageLoanAmount:   fd.get('mortgage_loan_amount') || '',
+    mortgageTerm:         fd.get('mortgage_term') || '',
+    mortgageLender:       fd.get('mortgage_lender') || '',
+    mortgageMonthlyPayment: fd.get('mortgage_monthly_payment') || '',
+
+    // Miscellaneous
+    clientOccupation:     fd.get('client_occupation') || '',
+    clientSchedule:       fd.get('client_schedule') || '',
+    spouseOccupation:     fd.get('spouse_occupation') || '',
+    spouseSchedule:       fd.get('spouse_schedule') || '',
+    beneficiary:          fd.get('beneficiary') || '',
+    hasChildren:          fd.get('has_children') || 'no',
+    childrenAges:         fd.get('children_ages') || '',
+    appointmentDatetime:  fd.get('appointment_datetime') || '',
+
+    // SMS consent
+    smsConsent:           smsEl && smsEl.checked ? 'yes' : 'no',
+    smsConsentTimestamp:  smsEl && smsEl.checked ? new Date().toISOString() : '',
+
+    // Meta
+    source:               'lifeinsurancecr.com',
+    formLocation:         form.dataset.form || 'unknown',
+    submittedAt:          new Date().toISOString(),
   };
 }
 
@@ -79,11 +161,7 @@ async function submitToGHL(payload) {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(payload),
   });
-
-  if (!response.ok) {
-    throw new Error(`Webhook responded with status ${response.status}`);
-  }
-
+  if (!response.ok) throw new Error(`Webhook responded with status ${response.status}`);
   return response;
 }
 
@@ -94,25 +172,19 @@ async function handleFormSubmit(e) {
   const submitBtn = form.querySelector('button[type="submit"]');
   const btnText = submitBtn.querySelector('.btn-text');
   const btnLoading = submitBtn.querySelector('.btn-loading');
-  const successEl = form.closest('.hero-form-card, .cta-form-card').querySelector('.form-success');
+  const card = form.closest('.intake-card, .hero-form-card, .cta-form-card');
+  const successEl = card ? card.querySelector('.form-success') : null;
 
-  // Basic validation
-  const phone = form.querySelector('input[name="phone"]');
-  const rawPhone = phone.value.replace(/\D/g, '');
-  if (rawPhone.length < 10) {
-    phone.setCustomValidity('Please enter a valid 10-digit phone number.');
-    phone.reportValidity();
-    phone.setCustomValidity('');
-    return;
-  }
-
-  const dob = form.querySelector('input[name="dateOfBirth"]');
-  const age = calcAge(dob.value);
-  if (age < 18 || age > 85) {
-    dob.setCustomValidity('Applicants must be between 18 and 85 years old.');
-    dob.reportValidity();
-    dob.setCustomValidity('');
-    return;
+  // Phone validation
+  const phoneEl = form.querySelector('input[name="phone"]');
+  if (phoneEl) {
+    const raw = phoneEl.value.replace(/\D/g, '');
+    if (raw.length < 10) {
+      phoneEl.setCustomValidity('Please enter a valid 10-digit phone number.');
+      phoneEl.reportValidity();
+      phoneEl.setCustomValidity('');
+      return;
+    }
   }
 
   // Loading state
@@ -124,73 +196,55 @@ async function handleFormSubmit(e) {
     const payload = buildPayload(form);
     await submitToGHL(payload);
 
-    // Show success
     form.hidden = true;
     if (successEl) successEl.hidden = false;
 
-    // Track conversion event if analytics are present
     if (typeof gtag === 'function') {
-      gtag('event', 'generate_lead', {
-        event_category: 'Lead',
-        event_label: form.dataset.form,
-      });
+      gtag('event', 'generate_lead', { event_category: 'Lead', event_label: form.dataset.form });
     }
-    if (typeof fbq === 'function') {
-      fbq('track', 'Lead');
-    }
+    if (typeof fbq === 'function') fbq('track', 'Lead');
+
   } catch (err) {
     console.error('Form submission error:', err);
-    // Re-enable form on error
     submitBtn.disabled = false;
     btnText.hidden = false;
     btnLoading.hidden = true;
 
-    // Show inline error
     let errorEl = form.querySelector('.form-error');
     if (!errorEl) {
       errorEl = document.createElement('p');
       errorEl.className = 'form-error';
-      errorEl.style.cssText = 'color:#dc2626;font-size:13px;text-align:center;margin-top:4px;';
+      errorEl.style.cssText = 'color:#dc2626;font-size:13px;text-align:center;margin-top:8px;';
       submitBtn.insertAdjacentElement('afterend', errorEl);
     }
-    errorEl.textContent = 'Something went wrong. Please try again or call us directly.';
+    errorEl.textContent = 'Something went wrong. Please try again.';
   }
 }
 
 // --- Wire up all forms ---
-document.querySelectorAll('.lead-form').forEach(form => {
+document.querySelectorAll('.intake-form, .lead-form').forEach(form => {
   form.addEventListener('submit', handleFormSubmit);
 });
 
-// --- Smooth scroll for CTA links ---
+// --- Smooth scroll for anchor links ---
 document.querySelectorAll('a[href^="#"]').forEach(link => {
   link.addEventListener('click', e => {
     const target = document.querySelector(link.getAttribute('href'));
     if (target) {
       e.preventDefault();
-      const offset = 72;
-      const top = target.getBoundingClientRect().top + window.scrollY - offset;
+      const top = target.getBoundingClientRect().top + window.scrollY - 72;
       window.scrollTo({ top, behavior: 'smooth' });
     }
   });
 });
 
-// --- Hide sticky CTA when hero form is visible ---
+// --- Hide sticky CTA when intake form is visible ---
 const stickyCta = document.getElementById('sticky-cta');
-const heroFormCard = document.getElementById('hero-form');
+const intakeSection = document.getElementById('hero-form');
 
-if (stickyCta && heroFormCard && window.IntersectionObserver) {
+if (stickyCta && intakeSection && window.IntersectionObserver) {
   const observer = new IntersectionObserver(([entry]) => {
     stickyCta.style.display = entry.isIntersecting ? 'none' : '';
-  }, { threshold: 0.2 });
-  observer.observe(heroFormCard);
+  }, { threshold: 0.1 });
+  observer.observe(intakeSection);
 }
-
-// --- Set max date for date of birth (must be at least 18) ---
-document.querySelectorAll('input[name="dateOfBirth"]').forEach(input => {
-  const today = new Date();
-  const maxDate = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate());
-  const minDate = new Date(today.getFullYear() - 85, today.getMonth(), today.getDate());
-  input.max = maxDate.toISOString().split('T')[0];
-  input.min = minDate.toISOString().split('T')[0];
-});

@@ -36,103 +36,255 @@
   </header>
 
   <!-- HERO -->
-  <section class="hero" id="home">
+  <section class="hero hero-simple" id="home">
     <div class="hero-overlay"></div>
-    <div class="container hero-content">
-      <div class="hero-text">
-        <div class="badge">Trusted by 10,000+ Families</div>
-        <h1>Protect Your Family's Future — <span class="highlight">Starting at $15/mo</span></h1>
-        <p class="hero-sub">Get your personalized life insurance quote in under 60 seconds. No medical exam required for most plans. 100% online — no home visits, no pressure.</p>
-        <ul class="hero-bullets">
-          <li><span class="check">✓</span> Instant approval for qualified applicants</li>
-          <li><span class="check">✓</span> Coverage up to $1,000,000</li>
-          <li><span class="check">✓</span> Top-rated A+ carriers</li>
-          <li><span class="check">✓</span> Cancel anytime, no fees</li>
-        </ul>
-      </div>
-      <div class="hero-form-card" id="hero-form">
-        <div class="form-header">
-          <h2>Get Your Free Quote</h2>
-          <p>No commitment. Takes under 60 seconds.</p>
+    <div class="container hero-simple-content">
+      <div class="badge">Trusted by 10,000+ Families</div>
+      <h1>Protect Your Family's Future — <span class="highlight">Starting at $15/mo</span></h1>
+      <p class="hero-sub">Get your personalized life insurance quote today. No medical exam required for most plans. 100% online — no home visits, no pressure.</p>
+      <div class="hero-cta-row">
+        <a href="#hero-form" class="btn btn-white">Get My Free Quote →</a>
+        <div class="hero-trust-pills">
+          <span>✓ A+ Rated Carriers</span>
+          <span>✓ No Obligation</span>
+          <span>✓ 100% Online</span>
         </div>
-        <form id="lead-form-hero" class="lead-form" data-form="hero">
-          <div class="form-row">
-            <div class="field">
-              <label for="h-fname">First Name *</label>
-              <input type="text" id="h-fname" name="firstName" placeholder="Jane" required autocomplete="given-name" />
-            </div>
-            <div class="field">
-              <label for="h-lname">Last Name *</label>
-              <input type="text" id="h-lname" name="lastName" placeholder="Smith" required autocomplete="family-name" />
-            </div>
-          </div>
-          <div class="field">
-            <label for="h-email">Email Address *</label>
-            <input type="email" id="h-email" name="email" placeholder="jane@example.com" required autocomplete="email" />
-          </div>
-          <div class="field">
-            <label for="h-phone">Phone Number *</label>
-            <input type="tel" id="h-phone" name="phone" placeholder="(555) 000-0000" required autocomplete="tel" />
-          </div>
-          <div class="form-row">
-            <div class="field">
-              <label for="h-dob">Date of Birth *</label>
-              <input type="date" id="h-dob" name="dateOfBirth" required />
-            </div>
-            <div class="field">
-              <label for="h-gender">Gender</label>
-              <select id="h-gender" name="gender">
-                <option value="">Select</option>
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-                <option value="other">Other</option>
-              </select>
+      </div>
+    </div>
+  </section>
+
+  <!-- FULL INTAKE FORM -->
+  <section class="intake-section" id="hero-form">
+    <div class="container">
+      <div class="intake-header">
+        <h2>Request Your Free Life Insurance Quote</h2>
+        <p>Complete the form below and a licensed agent will contact you within 24 hours with your personalized options.</p>
+      </div>
+
+      <div class="intake-card">
+        <form id="lead-form-main" class="intake-form" data-form="main">
+
+          <!-- CONTACT INFORMATION -->
+          <div class="form-block">
+            <h3 class="block-title">Contact Information</h3>
+            <div class="form-row">
+              <div class="field">
+                <label for="email">Email Address *</label>
+                <input type="email" id="email" name="email" placeholder="jane@example.com" required autocomplete="email" />
+              </div>
+              <div class="field">
+                <label for="phone">Phone Number *</label>
+                <input type="tel" id="phone" name="phone" placeholder="(555) 000-0000" required autocomplete="tel" />
+              </div>
             </div>
           </div>
-          <div class="field">
-            <label for="h-coverage">Coverage Amount *</label>
-            <select id="h-coverage" name="coverageAmount" required>
-              <option value="">Select coverage amount</option>
-              <option value="50000">$50,000</option>
-              <option value="100000">$100,000</option>
-              <option value="250000">$250,000</option>
-              <option value="500000">$500,000</option>
-              <option value="1000000">$1,000,000</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="h-type">Coverage Type</label>
-            <select id="h-type" name="coverageType">
-              <option value="">Select type</option>
-              <option value="term">Term Life Insurance</option>
-              <option value="whole">Whole Life Insurance</option>
-              <option value="universal">Universal Life Insurance</option>
-              <option value="not-sure">Not Sure — Help Me Choose</option>
-            </select>
-          </div>
-          <div class="field field-inline">
-            <label>Tobacco User?</label>
-            <div class="radio-group">
-              <label class="radio-label"><input type="radio" name="tobacco" value="no" checked /> No</label>
-              <label class="radio-label"><input type="radio" name="tobacco" value="yes" /> Yes</label>
+
+          <!-- GENERAL INFORMATION -->
+          <div class="form-block">
+            <h3 class="block-title">General Information</h3>
+            <div class="two-party-grid">
+              <div class="party-spacer"></div>
+              <div class="party-label">Client</div>
+              <div class="party-label">Spouse / Other</div>
+
+              <div class="row-label">Name</div>
+              <div class="field"><input type="text" name="client_name" placeholder="Full name" /></div>
+              <div class="field"><input type="text" name="spouse_name" placeholder="Full name" /></div>
+
+              <div class="row-label">Birthday</div>
+              <div class="field"><input type="date" id="client_dob" name="client_dob" /></div>
+              <div class="field"><input type="date" id="spouse_dob" name="spouse_dob" /></div>
+
+              <div class="row-label">Age</div>
+              <div class="field"><input type="number" id="client_age" name="client_age" placeholder="Age" min="0" max="100" /></div>
+              <div class="field"><input type="number" id="spouse_age" name="spouse_age" placeholder="Age" min="0" max="100" /></div>
+
+              <div class="row-label">Height</div>
+              <div class="field"><input type="text" name="client_height" placeholder='e.g. 5&apos;10"' /></div>
+              <div class="field"><input type="text" name="spouse_height" placeholder='e.g. 5&apos;6"' /></div>
+
+              <div class="row-label">Weight</div>
+              <div class="field"><input type="text" name="client_weight" placeholder="e.g. 175 lbs" /></div>
+              <div class="field"><input type="text" name="spouse_weight" placeholder="e.g. 140 lbs" /></div>
+
+              <div class="row-label">Smoker</div>
+              <div class="field">
+                <div class="radio-group">
+                  <label class="radio-label"><input type="radio" name="client_smoker" value="no" checked /> No</label>
+                  <label class="radio-label"><input type="radio" name="client_smoker" value="yes" /> Yes</label>
+                </div>
+              </div>
+              <div class="field">
+                <div class="radio-group">
+                  <label class="radio-label"><input type="radio" name="spouse_smoker" value="no" checked /> No</label>
+                  <label class="radio-label"><input type="radio" name="spouse_smoker" value="yes" /> Yes</label>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="field sms-consent-field">
-            <label class="sms-consent-label">
-              <input type="checkbox" name="smsConsent" value="yes" class="sms-checkbox" />
-              <span>I consent to receive conversational, informational, and promotional SMS messages from LifeInsuranceCR. Reply STOP to opt-out; Reply HELP for support; Message &amp; data rates may apply; Messaging frequency may vary. <a href="privacy-policy.html" target="_blank">Privacy Policy</a></span>
-            </label>
+
+          <!-- MEDICAL CONCERNS -->
+          <div class="form-block">
+            <h3 class="block-title">Medical Concerns</h3>
+            <div class="medical-table">
+              <div class="medical-header-row">
+                <div>Condition</div>
+                <div>Client</div>
+                <div>Spouse / Other</div>
+              </div>
+              <div class="medical-row">
+                <span>High Blood Pressure</span>
+                <label class="check-cell"><input type="checkbox" name="client_hbp" /> Yes</label>
+                <label class="check-cell"><input type="checkbox" name="spouse_hbp" /> Yes</label>
+              </div>
+              <div class="medical-row">
+                <span>Heart Attack</span>
+                <label class="check-cell"><input type="checkbox" name="client_heart_attack" /> Yes</label>
+                <label class="check-cell"><input type="checkbox" name="spouse_heart_attack" /> Yes</label>
+              </div>
+              <div class="medical-row">
+                <span>Stroke</span>
+                <label class="check-cell"><input type="checkbox" name="client_stroke" /> Yes</label>
+                <label class="check-cell"><input type="checkbox" name="spouse_stroke" /> Yes</label>
+              </div>
+              <div class="medical-row">
+                <span>Cancer</span>
+                <label class="check-cell"><input type="checkbox" name="client_cancer" /> Yes</label>
+                <label class="check-cell"><input type="checkbox" name="spouse_cancer" /> Yes</label>
+              </div>
+              <div class="medical-row">
+                <span>Diabetes</span>
+                <label class="check-cell"><input type="checkbox" name="client_diabetes" /> Yes</label>
+                <label class="check-cell"><input type="checkbox" name="spouse_diabetes" /> Yes</label>
+              </div>
+              <div class="medical-row">
+                <span>High Cholesterol</span>
+                <label class="check-cell"><input type="checkbox" name="client_cholesterol" /> Yes</label>
+                <label class="check-cell"><input type="checkbox" name="spouse_cholesterol" /> Yes</label>
+              </div>
+              <div class="medical-row">
+                <span>DUI / Substance Abuse</span>
+                <label class="check-cell"><input type="checkbox" name="client_dui" /> Yes</label>
+                <label class="check-cell"><input type="checkbox" name="spouse_dui" /> Yes</label>
+              </div>
+              <div class="medical-row">
+                <span>Any Surgeries or Diseases</span>
+                <label class="check-cell"><input type="checkbox" name="client_surgery" /> Yes</label>
+                <label class="check-cell"><input type="checkbox" name="spouse_surgery" /> Yes</label>
+              </div>
+              <div class="medical-row">
+                <span>Accidents in the Past 10 Years</span>
+                <label class="check-cell"><input type="checkbox" name="client_accidents" /> Yes</label>
+                <label class="check-cell"><input type="checkbox" name="spouse_accidents" /> Yes</label>
+              </div>
+            </div>
           </div>
-          <button type="submit" class="btn btn-primary btn-full">
-            <span class="btn-text">Get My Free Quote →</span>
-            <span class="btn-loading" hidden>Submitting…</span>
-          </button>
-          <p class="form-disclaimer">By submitting, you agree to be contacted by a licensed agent. SMS consent is optional. <a href="privacy-policy.html" target="_blank">Privacy Policy &amp; SMS Terms</a></p>
+
+          <!-- MEDICATIONS -->
+          <div class="form-block">
+            <h3 class="block-title">Medications</h3>
+            <div class="form-row">
+              <div class="field">
+                <label>Client — Current Medications</label>
+                <textarea name="client_medications" placeholder="List any current medications…" rows="3"></textarea>
+              </div>
+              <div class="field">
+                <label>Spouse / Other — Current Medications</label>
+                <textarea name="spouse_medications" placeholder="List any current medications…" rows="3"></textarea>
+              </div>
+            </div>
+          </div>
+
+          <!-- MORTGAGE INFORMATION -->
+          <div class="form-block">
+            <h3 class="block-title">Mortgage Information</h3>
+            <div class="form-row">
+              <div class="field">
+                <label>Loan Amount</label>
+                <input type="text" name="mortgage_loan_amount" placeholder="e.g. $250,000" />
+              </div>
+              <div class="field">
+                <label>Mortgage Term</label>
+                <input type="text" name="mortgage_term" placeholder="e.g. 30 years" />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="field">
+                <label>Lender</label>
+                <input type="text" name="mortgage_lender" placeholder="e.g. Wells Fargo" />
+              </div>
+              <div class="field">
+                <label>Monthly Payment</label>
+                <input type="text" name="mortgage_monthly_payment" placeholder="e.g. $1,450/mo" />
+              </div>
+            </div>
+          </div>
+
+          <!-- MISCELLANEOUS -->
+          <div class="form-block">
+            <h3 class="block-title">Miscellaneous</h3>
+
+            <div class="two-party-grid">
+              <div class="party-spacer"></div>
+              <div class="party-label">Client</div>
+              <div class="party-label">Spouse / Other</div>
+
+              <div class="row-label">Occupation</div>
+              <div class="field"><input type="text" name="client_occupation" placeholder="e.g. Teacher" /></div>
+              <div class="field"><input type="text" name="spouse_occupation" placeholder="e.g. Nurse" /></div>
+
+              <div class="row-label">Schedule</div>
+              <div class="field"><input type="text" name="client_schedule" placeholder="e.g. Mon–Fri 9–5" /></div>
+              <div class="field"><input type="text" name="spouse_schedule" placeholder="e.g. Weekends" /></div>
+            </div>
+
+            <div class="misc-fields">
+              <div class="field">
+                <label>Beneficiary Full Name &amp; Relationship</label>
+                <input type="text" name="beneficiary" placeholder="e.g. John Smith — Spouse" />
+              </div>
+
+              <div class="field field-inline children-field">
+                <label>Do you have children?</label>
+                <div class="radio-group">
+                  <label class="radio-label"><input type="radio" name="has_children" value="yes" id="children_yes" /> Yes</label>
+                  <label class="radio-label"><input type="radio" name="has_children" value="no" checked /> No</label>
+                </div>
+              </div>
+
+              <div class="field children-ages-field" id="children_ages_field" hidden>
+                <label>Children's Ages</label>
+                <input type="text" name="children_ages" placeholder="e.g. 5, 8, 12" />
+              </div>
+
+              <div class="field">
+                <label>Appointment Date &amp; Time</label>
+                <input type="datetime-local" name="appointment_datetime" />
+              </div>
+            </div>
+          </div>
+
+          <!-- SMS CONSENT + SUBMIT -->
+          <div class="form-block form-block-submit">
+            <div class="field sms-consent-field">
+              <label class="sms-consent-label">
+                <input type="checkbox" name="smsConsent" value="yes" class="sms-checkbox" />
+                <span>I consent to receive conversational, informational, and promotional SMS messages from LifeInsuranceCR. Reply STOP to opt-out; Reply HELP for support; Message &amp; data rates may apply; Messaging frequency may vary. <a href="privacy-policy.html" target="_blank">Privacy Policy</a></span>
+              </label>
+            </div>
+            <button type="submit" class="btn btn-primary btn-full btn-large">
+              <span class="btn-text">Submit My Quote Request →</span>
+              <span class="btn-loading" hidden>Submitting…</span>
+            </button>
+            <p class="form-disclaimer">By submitting, you agree to be contacted by a licensed agent. SMS consent is optional. <a href="privacy-policy.html" target="_blank">Privacy Policy &amp; SMS Terms</a></p>
+          </div>
+
         </form>
-        <div class="form-success" hidden>
+
+        <div class="form-success intake-success" hidden>
           <div class="success-icon">✓</div>
-          <h3>You're on the list!</h3>
-          <p>A licensed agent will reach out within <strong>24 hours</strong> with your personalized quote. Check your email for confirmation.</p>
+          <h3>Quote Request Received!</h3>
+          <p>A licensed agent will reach out within <strong>24 hours</strong> with your personalized quote. Check your email and phone for confirmation.</p>
         </div>
       </div>
     </div>
@@ -157,8 +309,8 @@
       </div>
       <div class="trust-divider"></div>
       <div class="trust-item">
-        <strong>60 sec</strong>
-        <span>Average Quote Time</span>
+        <strong>24 hrs</strong>
+        <span>Agent Response Time</span>
       </div>
     </div>
   </div>
@@ -174,7 +326,7 @@
         <div class="step">
           <div class="step-num">1</div>
           <h3>Fill Out the Form</h3>
-          <p>Answer a few quick questions — takes under 60 seconds. No medical exam required for most plans.</p>
+          <p>Complete the quote form above — no medical exam required for most plans.</p>
         </div>
         <div class="step-arrow">→</div>
         <div class="step">
@@ -186,7 +338,7 @@
         <div class="step">
           <div class="step-num">3</div>
           <h3>Get Covered</h3>
-          <p>Choose your plan and get covered the same day. 100% online — no home visits required.</p>
+          <p>Choose your plan and get covered. 100% online — no home visits required.</p>
         </div>
       </div>
     </div>
@@ -352,93 +504,17 @@
     </div>
   </section>
 
-  <!-- BOTTOM CTA SECTION -->
+  <!-- BOTTOM CTA -->
   <section class="section cta-section" id="get-quote">
-    <div class="container">
-      <div class="cta-wrapper">
-        <div class="cta-text">
-          <h2>Ready to Protect Your Family?</h2>
-          <p>Join thousands of families who've secured their future. Get your free, no-obligation quote in under 60 seconds.</p>
-          <ul class="cta-bullets">
-            <li>✓ No home visits required</li>
-            <li>✓ 100% online process</li>
-            <li>✓ Licensed agents standing by</li>
-          </ul>
-        </div>
-        <div class="cta-form-card">
-          <form id="lead-form-bottom" class="lead-form" data-form="bottom">
-            <h3>Start Your Free Quote</h3>
-            <div class="form-row">
-              <div class="field">
-                <label for="b-fname">First Name *</label>
-                <input type="text" id="b-fname" name="firstName" placeholder="Jane" required autocomplete="given-name" />
-              </div>
-              <div class="field">
-                <label for="b-lname">Last Name *</label>
-                <input type="text" id="b-lname" name="lastName" placeholder="Smith" required autocomplete="family-name" />
-              </div>
-            </div>
-            <div class="field">
-              <label for="b-email">Email Address *</label>
-              <input type="email" id="b-email" name="email" placeholder="jane@example.com" required autocomplete="email" />
-            </div>
-            <div class="field">
-              <label for="b-phone">Phone Number *</label>
-              <input type="tel" id="b-phone" name="phone" placeholder="(555) 000-0000" required autocomplete="tel" />
-            </div>
-            <div class="form-row">
-              <div class="field">
-                <label for="b-dob">Date of Birth *</label>
-                <input type="date" id="b-dob" name="dateOfBirth" required />
-              </div>
-              <div class="field">
-                <label for="b-coverage">Coverage *</label>
-                <select id="b-coverage" name="coverageAmount" required>
-                  <option value="">Select amount</option>
-                  <option value="50000">$50,000</option>
-                  <option value="100000">$100,000</option>
-                  <option value="250000">$250,000</option>
-                  <option value="500000">$500,000</option>
-                  <option value="1000000">$1,000,000</option>
-                </select>
-              </div>
-            </div>
-            <div class="field">
-              <label for="b-type">Coverage Type</label>
-              <select id="b-type" name="coverageType">
-                <option value="">Select type</option>
-                <option value="term">Term Life Insurance</option>
-                <option value="whole">Whole Life Insurance</option>
-                <option value="universal">Universal Life Insurance</option>
-                <option value="not-sure">Not Sure — Help Me Choose</option>
-              </select>
-            </div>
-            <div class="field field-inline">
-              <label>Tobacco User?</label>
-              <div class="radio-group">
-                <label class="radio-label"><input type="radio" name="tobacco_b" value="no" checked /> No</label>
-                <label class="radio-label"><input type="radio" name="tobacco_b" value="yes" /> Yes</label>
-              </div>
-            </div>
-            <div class="field sms-consent-field">
-              <label class="sms-consent-label">
-                <input type="checkbox" name="smsConsent" value="yes" class="sms-checkbox" />
-                <span>I consent to receive conversational, informational, and promotional SMS messages from LifeInsuranceCR. Reply STOP to opt-out; Reply HELP for support; Message &amp; data rates may apply; Messaging frequency may vary. <a href="privacy-policy.html" target="_blank">Privacy Policy</a></span>
-              </label>
-            </div>
-            <button type="submit" class="btn btn-primary btn-full">
-              <span class="btn-text">Get My Free Quote →</span>
-              <span class="btn-loading" hidden>Submitting…</span>
-            </button>
-            <p class="form-disclaimer">By submitting, you agree to be contacted by a licensed agent. SMS consent is optional. <a href="privacy-policy.html" target="_blank">Privacy Policy &amp; SMS Terms</a></p>
-          </form>
-          <div class="form-success" hidden>
-            <div class="success-icon">✓</div>
-            <h3>Quote request received!</h3>
-            <p>A licensed agent will reach out within <strong>24 hours</strong> with your personalized quote.</p>
-          </div>
-        </div>
+    <div class="container cta-simple">
+      <h2>Ready to Protect Your Family?</h2>
+      <p>Join thousands of families who've secured their future. Complete the free quote form above — takes just a few minutes.</p>
+      <div class="cta-simple-bullets">
+        <span>✓ No home visits required</span>
+        <span>✓ 100% online process</span>
+        <span>✓ Licensed agents standing by</span>
       </div>
+      <a href="#hero-form" class="btn btn-white btn-large">Get My Free Quote →</a>
     </div>
   </section>
 
