@@ -116,7 +116,6 @@ function getMedicalConcerns(form, prefix) {
 // --- Build GHL payload ---
 function buildPayload(form) {
   const fd = new FormData(form);
-  const smsEl = form.querySelector('.sms-checkbox');
 
   return {
     // Contact
@@ -164,9 +163,10 @@ function buildPayload(form) {
     childrenAges:         fd.get('children_ages') || '',
     appointmentDatetime:  fd.get('appointment_datetime') || '',
 
-    // SMS consent
-    smsConsent:           smsEl && smsEl.checked ? 'yes' : 'no',
-    smsConsentTimestamp:  smsEl && smsEl.checked ? new Date().toISOString() : '',
+    // SMS consent (two separate A2P-compliant checkboxes)
+    smsConsentNonMarketing: form.querySelector('input[name="smsConsentNonMarketing"]')?.checked ? 'yes' : 'no',
+    smsConsentMarketing:    form.querySelector('input[name="smsConsentMarketing"]')?.checked ? 'yes' : 'no',
+    smsConsentTimestamp:    (form.querySelector('input[name="smsConsentNonMarketing"]')?.checked || form.querySelector('input[name="smsConsentMarketing"]')?.checked) ? new Date().toISOString() : '',
 
     // Meta
     source:               'lifeinsurancecr.com',

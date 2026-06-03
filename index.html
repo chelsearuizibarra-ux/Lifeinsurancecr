@@ -329,17 +329,29 @@
 
           <!-- SMS CONSENT + SUBMIT -->
           <div class="form-block form-block-submit">
+            <p class="consent-intro">By providing your phone number you may be contacted by a licensed agent. SMS consent is <strong>optional</strong> and not required to submit this form.</p>
+
             <div class="field sms-consent-field">
               <label class="sms-consent-label">
-                <input type="checkbox" name="smsConsent" value="yes" class="sms-checkbox" />
-                <span>I consent to receive conversational, informational, and promotional SMS messages from LifeInsuranceCR. Reply STOP to opt-out; Reply HELP for support; Message &amp; data rates may apply; Messaging frequency may vary. <a href="privacy-policy.html" target="_blank">Privacy Policy</a></span>
+                <input type="checkbox" name="smsConsentNonMarketing" value="yes" class="sms-checkbox" />
+                <span>I consent to receive non-marketing text messages from LifeInsuranceCR about insurance quote follow-ups, appointment confirmations, and policy information. Message frequency may vary. Message &amp; data rates may apply. Text HELP for assistance, reply STOP to opt out.</span>
               </label>
             </div>
+
+            <div class="field sms-consent-field">
+              <label class="sms-consent-label">
+                <input type="checkbox" name="smsConsentMarketing" value="yes" class="sms-checkbox" />
+                <span>I consent to receive marketing text messages, about special offers, discounts, and service updates, from LifeInsuranceCR at the phone number provided. Message frequency may vary. Message &amp; data rates may apply. Text HELP for assistance, reply STOP to opt out.</span>
+              </label>
+            </div>
+
             <button type="submit" class="btn btn-primary btn-full btn-large">
               <span class="btn-text">Submit My Quote Request →</span>
               <span class="btn-loading" hidden>Submitting…</span>
             </button>
-            <p class="form-disclaimer">By submitting, you agree to be contacted by a licensed agent. SMS consent is optional. <a href="privacy-policy.html" target="_blank">Privacy Policy &amp; SMS Terms</a></p>
+            <p class="form-disclaimer">
+              <a href="privacy-policy.html" target="_blank">Privacy Policy &amp; SMS Terms</a> &nbsp;|&nbsp; <a href="terms.html" target="_blank">Terms &amp; Conditions</a>
+            </p>
           </div>
 
         </form>
