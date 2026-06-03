@@ -51,6 +51,8 @@ function buildPayload(form) {
   const tobacco = fd.get('tobacco') || fd.get('tobacco_b') || 'no';
   const dob = fd.get('dateOfBirth') || '';
 
+  const smsConsent = form.querySelector('.sms-checkbox');
+
   return {
     firstName:      fd.get('firstName') || '',
     lastName:       fd.get('lastName') || '',
@@ -62,6 +64,8 @@ function buildPayload(form) {
     coverageAmount: fd.get('coverageAmount') || '',
     coverageType:   fd.get('coverageType') || '',
     tobaccoUser:    tobacco,
+    smsConsent:     smsConsent && smsConsent.checked ? 'yes' : 'no',
+    smsConsentTimestamp: smsConsent && smsConsent.checked ? new Date().toISOString() : '',
     source:         'lifeinsurancecr.com',
     formLocation:   form.dataset.form || 'unknown',
     submittedAt:    new Date().toISOString(),

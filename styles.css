@@ -343,6 +343,43 @@ body {
   line-height: 1.5;
 }
 
+.form-disclaimer a {
+  color: var(--blue);
+  text-decoration: underline;
+}
+
+.sms-consent-field {
+  background: #f8fafc;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+}
+
+.sms-consent-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  cursor: pointer;
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.6;
+  font-weight: 400;
+}
+
+.sms-checkbox {
+  width: 16px !important;
+  height: 16px;
+  flex-shrink: 0;
+  margin-top: 2px;
+  accent-color: var(--blue);
+  cursor: pointer;
+}
+
+.sms-consent-label a {
+  color: var(--blue);
+  text-decoration: underline;
+}
+
 /* === FORM SUCCESS STATE === */
 .form-success {
   padding: 40px 28px;
