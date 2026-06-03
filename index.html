@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Get affordable life insurance coverage in minutes. Compare top-rated plans and protect your family's future today. Free, no-obligation quote." />
+  <meta name="keywords" content="life insurance, affordable life insurance, term life, whole life, family protection, life insurance quote" />
+  <meta property="og:title" content="LifeInsuranceCR — Protect Your Family Today" />
+  <meta property="og:description" content="Get a free life insurance quote in under 60 seconds. No obligation. No home visits." />
+  <meta property="og:type" content="website" />
+  <title>LifeInsuranceCR — Protect Your Family's Future</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- STICKY NAV -->
+  <header class="navbar" id="navbar">
+    <div class="container nav-inner">
+      <a href="#" class="logo">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+          <circle cx="16" cy="16" r="16" fill="#1a6fb4"/>
+          <path d="M16 7l2.5 5.5H24l-4.5 4 1.75 5.5L16 19l-5.25 3 1.75-5.5L8 12.5h5.5L16 7z" fill="#fff"/>
+        </svg>
+        <span>LifeInsurance<strong>CR</strong></span>
+      </a>
+      <nav class="nav-links">
+        <a href="#how-it-works">How It Works</a>
+        <a href="#coverage">Coverage</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <a href="#hero-form" class="btn btn-nav">Get Free Quote</a>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero-overlay"></div>
+    <div class="container hero-content">
+      <div class="hero-text">
+        <div class="badge">Trusted by 10,000+ Families</div>
+        <h1>Protect Your Family's Future — <span class="highlight">Starting at $15/mo</span></h1>
+        <p class="hero-sub">Get your personalized life insurance quote in under 60 seconds. No medical exam required for most plans. 100% online — no home visits, no pressure.</p>
+        <ul class="hero-bullets">
+          <li><span class="check">✓</span> Instant approval for qualified applicants</li>
+          <li><span class="check">✓</span> Coverage up to $1,000,000</li>
+          <li><span class="check">✓</span> Top-rated A+ carriers</li>
+          <li><span class="check">✓</span> Cancel anytime, no fees</li>
+        </ul>
+      </div>
+      <div class="hero-form-card" id="hero-form">
+        <div class="form-header">
+          <h2>Get Your Free Quote</h2>
+          <p>No commitment. Takes under 60 seconds.</p>
+        </div>
+        <form id="lead-form-hero" class="lead-form" data-form="hero">
+          <div class="form-row">
+            <div class="field">
+              <label for="h-fname">First Name *</label>
+              <input type="text" id="h-fname" name="firstName" placeholder="Jane" required autocomplete="given-name" />
+            </div>
+            <div class="field">
+              <label for="h-lname">Last Name *</label>
+              <input type="text" id="h-lname" name="lastName" placeholder="Smith" required autocomplete="family-name" />
+            </div>
+          </div>
+          <div class="field">
+            <label for="h-email">Email Address *</label>
+            <input type="email" id="h-email" name="email" placeholder="jane@example.com" required autocomplete="email" />
+          </div>
+          <div class="field">
+            <label for="h-phone">Phone Number *</label>
+            <input type="tel" id="h-phone" name="phone" placeholder="(555) 000-0000" required autocomplete="tel" />
+          </div>
+          <div class="form-row">
+            <div class="field">
+              <label for="h-dob">Date of Birth *</label>
+              <input type="date" id="h-dob" name="dateOfBirth" required />
+            </div>
+            <div class="field">
+              <label for="h-gender">Gender</label>
+              <select id="h-gender" name="gender">
+                <option value="">Select</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+          </div>
+          <div class="field">
+            <label for="h-coverage">Coverage Amount *</label>
+            <select id="h-coverage" name="coverageAmount" required>
+              <option value="">Select coverage amount</option>
+              <option value="50000">$50,000</option>
+              <option value="100000">$100,000</option>
+              <option value="250000">$250,000</option>
+              <option value="500000">$500,000</option>
+              <option value="1000000">$1,000,000</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="h-type">Coverage Type</label>
+            <select id="h-type" name="coverageType">
+              <option value="">Select type</option>
+              <option value="term">Term Life Insurance</option>
+              <option value="whole">Whole Life Insurance</option>
+              <option value="universal">Universal Life Insurance</option>
+              <option value="not-sure">Not Sure — Help Me Choose</option>
+            </select>
+          </div>
+          <div class="field field-inline">
+            <label>Tobacco User?</label>
+            <div class="radio-group">
+              <label class="radio-label"><input type="radio" name="tobacco" value="no" checked /> No</label>
+              <label class="radio-label"><input type="radio" name="tobacco" value="yes" /> Yes</label>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary btn-full">
+            <span class="btn-text">Get My Free Quote →</span>
+            <span class="btn-loading" hidden>Submitting…</span>
+          </button>
+          <p class="form-disclaimer">By submitting, you agree to be contacted by a licensed agent. No spam. Unsubscribe anytime.</p>
+        </form>
+        <div class="form-success" hidden>
+          <div class="success-icon">✓</div>
+          <h3>You're on the list!</h3>
+          <p>A licensed agent will reach out within <strong>24 hours</strong> with your personalized quote. Check your email for confirmation.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST BAR -->
+  <div class="trust-bar">
+    <div class="container trust-inner">
+      <div class="trust-item">
+        <strong>A+</strong>
+        <span>Rated Carriers</span>
+      </div>
+      <div class="trust-divider"></div>
+      <div class="trust-item">
+        <strong>10,000+</strong>
+        <span>Families Protected</span>
+      </div>
+      <div class="trust-divider"></div>
+      <div class="trust-item">
+        <strong>$0</strong>
+        <span>Cost to Get a Quote</span>
+      </div>
+      <div class="trust-divider"></div>
+      <div class="trust-item">
+        <strong>60 sec</strong>
+        <span>Average Quote Time</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <section class="section how-it-works" id="how-it-works">
+    <div class="container">
+      <div class="section-header">
+        <h2>How It Works</h2>
+        <p>Getting protected has never been easier. Three simple steps.</p>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <h3>Fill Out the Form</h3>
+          <p>Answer a few quick questions — takes under 60 seconds. No medical exam required for most plans.</p>
+        </div>
+        <div class="step-arrow">→</div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <h3>Get Your Quote</h3>
+          <p>A licensed agent reviews your profile and sends you personalized options from top-rated carriers.</p>
+        </div>
+        <div class="step-arrow">→</div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <h3>Get Covered</h3>
+          <p>Choose your plan and get covered the same day. 100% online — no home visits required.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COVERAGE OPTIONS -->
+  <section class="section coverage" id="coverage">
+    <div class="container">
+      <div class="section-header">
+        <h2>Coverage Options</h2>
+        <p>Plans for every stage of life and every budget.</p>
+      </div>
+      <div class="coverage-cards">
+        <div class="coverage-card">
+          <div class="coverage-icon">🛡️</div>
+          <h3>Term Life</h3>
+          <p class="coverage-price">From <strong>$15/mo</strong></p>
+          <ul>
+            <li>10, 20, or 30-year terms</li>
+            <li>Coverage up to $1M</li>
+            <li>Level premium locked in</li>
+            <li>Best for: Young families</li>
+          </ul>
+          <a href="#hero-form" class="btn btn-outline">Get Quote</a>
+        </div>
+        <div class="coverage-card featured">
+          <div class="featured-badge">Most Popular</div>
+          <div class="coverage-icon">⭐</div>
+          <h3>Whole Life</h3>
+          <p class="coverage-price">From <strong>$45/mo</strong></p>
+          <ul>
+            <li>Lifetime coverage guaranteed</li>
+            <li>Builds cash value over time</li>
+            <li>Fixed premiums forever</li>
+            <li>Best for: Long-term security</li>
+          </ul>
+          <a href="#hero-form" class="btn btn-primary">Get Quote</a>
+        </div>
+        <div class="coverage-card">
+          <div class="coverage-icon">📈</div>
+          <h3>Universal Life</h3>
+          <p class="coverage-price">From <strong>$35/mo</strong></p>
+          <ul>
+            <li>Flexible premium payments</li>
+            <li>Adjustable death benefit</li>
+            <li>Investment component</li>
+            <li>Best for: Wealth building</li>
+          </ul>
+          <a href="#hero-form" class="btn btn-outline">Get Quote</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOCIAL PROOF -->
+  <section class="section testimonials">
+    <div class="container">
+      <div class="section-header">
+        <h2>What Our Clients Say</h2>
+        <p>Real stories from real families we've protected.</p>
+      </div>
+      <div class="testimonial-grid">
+        <div class="testimonial">
+          <div class="stars">★★★★★</div>
+          <p>"I was nervous about getting life insurance but the process was completely online. Got my quote the same day and was approved in 48 hours. No home visits, no hassle."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">MR</div>
+            <div>
+              <strong>Maria R.</strong>
+              <span>Mother of 3 · Term Life, $500K</span>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial">
+          <div class="stars">★★★★★</div>
+          <p>"Best decision I made for my family. The agent was knowledgeable and helped me find the right plan at a price I could afford. No pressure, just honest advice."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">JT</div>
+            <div>
+              <strong>James T.</strong>
+              <span>Business Owner · Whole Life, $250K</span>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial">
+          <div class="stars">★★★★★</div>
+          <p>"I filled out the form on a Monday and had a quote by Tuesday morning. The whole thing took maybe 2 minutes. Can't believe I waited so long to get coverage."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">SL</div>
+            <div>
+              <strong>Sandra L.</strong>
+              <span>Nurse · Term Life, $1M</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section faq" id="faq">
+    <div class="container faq-container">
+      <div class="section-header">
+        <h2>Frequently Asked Questions</h2>
+        <p>Everything you need to know before getting started.</p>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            Do I need a medical exam to qualify?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Most applicants qualify for coverage without a medical exam. Plans up to $500,000 often have simplified underwriting — just a few health questions online. Larger coverage amounts may require an exam.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            How quickly can I get covered?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Many applicants receive same-day or next-day approval. After filling out the form, a licensed agent will contact you within 24 hours with your personalized options.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            Is this quote really free?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Yes, 100% free with no obligation. You'll receive personalized quotes at no cost. You only pay if you choose to purchase a policy.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            Will someone come to my home?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>No. Our entire process is 100% online and over the phone. No home visits, no in-person meetings required. Everything can be handled digitally from start to finish.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            What if I have pre-existing conditions?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Many people with health conditions still qualify for life insurance. The type and cost of coverage will depend on your specific situation. Our agents work with multiple carriers to find you the best available rate.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            Can I cancel my policy?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Yes. Most policies have a free-look period (typically 10–30 days) where you can cancel for a full refund. After that, you can cancel anytime with no penalty fees.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOTTOM CTA SECTION -->
+  <section class="section cta-section" id="get-quote">
+    <div class="container">
+      <div class="cta-wrapper">
+        <div class="cta-text">
+          <h2>Ready to Protect Your Family?</h2>
+          <p>Join thousands of families who've secured their future. Get your free, no-obligation quote in under 60 seconds.</p>
+          <ul class="cta-bullets">
+            <li>✓ No home visits required</li>
+            <li>✓ 100% online process</li>
+            <li>✓ Licensed agents standing by</li>
+          </ul>
+        </div>
+        <div class="cta-form-card">
+          <form id="lead-form-bottom" class="lead-form" data-form="bottom">
+            <h3>Start Your Free Quote</h3>
+            <div class="form-row">
+              <div class="field">
+                <label for="b-fname">First Name *</label>
+                <input type="text" id="b-fname" name="firstName" placeholder="Jane" required autocomplete="given-name" />
+              </div>
+              <div class="field">
+                <label for="b-lname">Last Name *</label>
+                <input type="text" id="b-lname" name="lastName" placeholder="Smith" required autocomplete="family-name" />
+              </div>
+            </div>
+            <div class="field">
+              <label for="b-email">Email Address *</label>
+              <input type="email" id="b-email" name="email" placeholder="jane@example.com" required autocomplete="email" />
+            </div>
+            <div class="field">
+              <label for="b-phone">Phone Number *</label>
+              <input type="tel" id="b-phone" name="phone" placeholder="(555) 000-0000" required autocomplete="tel" />
+            </div>
+            <div class="form-row">
+              <div class="field">
+                <label for="b-dob">Date of Birth *</label>
+                <input type="date" id="b-dob" name="dateOfBirth" required />
+              </div>
+              <div class="field">
+                <label for="b-coverage">Coverage *</label>
+                <select id="b-coverage" name="coverageAmount" required>
+                  <option value="">Select amount</option>
+                  <option value="50000">$50,000</option>
+                  <option value="100000">$100,000</option>
+                  <option value="250000">$250,000</option>
+                  <option value="500000">$500,000</option>
+                  <option value="1000000">$1,000,000</option>
+                </select>
+              </div>
+            </div>
+            <div class="field">
+              <label for="b-type">Coverage Type</label>
+              <select id="b-type" name="coverageType">
+                <option value="">Select type</option>
+                <option value="term">Term Life Insurance</option>
+                <option value="whole">Whole Life Insurance</option>
+                <option value="universal">Universal Life Insurance</option>
+                <option value="not-sure">Not Sure — Help Me Choose</option>
+              </select>
+            </div>
+            <div class="field field-inline">
+              <label>Tobacco User?</label>
+              <div class="radio-group">
+                <label class="radio-label"><input type="radio" name="tobacco_b" value="no" checked /> No</label>
+                <label class="radio-label"><input type="radio" name="tobacco_b" value="yes" /> Yes</label>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary btn-full">
+              <span class="btn-text">Get My Free Quote →</span>
+              <span class="btn-loading" hidden>Submitting…</span>
+            </button>
+            <p class="form-disclaimer">By submitting, you agree to be contacted by a licensed agent. No spam.</p>
+          </form>
+          <div class="form-success" hidden>
+            <div class="success-icon">✓</div>
+            <h3>Quote request received!</h3>
+            <p>A licensed agent will reach out within <strong>24 hours</strong> with your personalized quote.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <a href="#" class="logo">
+          <svg width="28" height="28" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+            <circle cx="16" cy="16" r="16" fill="#1a6fb4"/>
+            <path d="M16 7l2.5 5.5H24l-4.5 4 1.75 5.5L16 19l-5.25 3 1.75-5.5L8 12.5h5.5L16 7z" fill="#fff"/>
+          </svg>
+          <span>LifeInsurance<strong>CR</strong></span>
+        </a>
+        <p>Helping families protect what matters most. Licensed insurance professionals available to guide you.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Quick Links</h4>
+        <a href="#how-it-works">How It Works</a>
+        <a href="#coverage">Coverage Options</a>
+        <a href="#faq">FAQ</a>
+        <a href="#hero-form">Get a Quote</a>
+      </div>
+      <div class="footer-contact">
+        <h4>Contact</h4>
+        <p>A licensed agent will contact you after submitting your quote request.</p>
+        <a href="#hero-form" class="btn btn-outline btn-sm">Get Free Quote</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <p>&copy; 2026 LifeInsuranceCR. All rights reserved. | Life insurance products and services are provided by licensed insurance agents. This site is not affiliated with any government agency.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- STICKY MOBILE CTA -->
+  <div class="sticky-cta" id="sticky-cta">
+    <a href="#hero-form" class="btn btn-primary btn-full sticky-btn">Get My Free Quote — No Obligation</a>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
