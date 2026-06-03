@@ -64,6 +64,26 @@ if (spouseDob && spouseAge) {
   });
 }
 
+// --- Show/hide spouse fields ---
+function applySpouseVisibility(hasSpouse) {
+  const grids = document.querySelectorAll('.two-party-grid');
+  const medTable = document.getElementById('medical-table');
+  const spouseCols = document.querySelectorAll('.form-row .spouse-col');
+
+  grids.forEach(g => g.classList.toggle('no-spouse', !hasSpouse));
+  if (medTable) medTable.classList.toggle('no-spouse', !hasSpouse);
+  spouseCols.forEach(el => el.classList.toggle('hidden', !hasSpouse));
+}
+
+document.querySelectorAll('input[name="has_spouse"]').forEach(radio => {
+  radio.addEventListener('change', () => {
+    applySpouseVisibility(radio.value === 'yes');
+  });
+});
+
+// Initialize spouse visibility on load (default = No)
+applySpouseVisibility(false);
+
 // --- Show/hide children ages field ---
 document.querySelectorAll('input[name="has_children"]').forEach(radio => {
   radio.addEventListener('change', () => {
@@ -72,7 +92,7 @@ document.querySelectorAll('input[name="has_children"]').forEach(radio => {
   });
 });
 
-// --- Build medical concerns list from checkboxes ---
+// --- Build medical concerns list from Yes/No radios ---
 function getMedicalConcerns(form, prefix) {
   const conditions = [];
   const map = {
@@ -87,8 +107,8 @@ function getMedicalConcerns(form, prefix) {
     accidents: 'Accidents (Past 10 Years)',
   };
   for (const [key, label] of Object.entries(map)) {
-    const el = form.querySelector(`input[name="${prefix}_${key}"]`);
-    if (el && el.checked) conditions.push(label);
+    const el = form.querySelector(`input[name="${prefix}_${key}"]:checked`);
+    if (el && el.value === 'yes') conditions.push(label);
   }
   return conditions.join(', ') || 'None';
 }
@@ -100,6 +120,7 @@ function buildPayload(form) {
 
   return {
     // Contact
+    hasSpouse:            fd.get('has_spouse') || 'no',
     email:                fd.get('email') || '',
     phone:                fd.get('phone') || '',
 

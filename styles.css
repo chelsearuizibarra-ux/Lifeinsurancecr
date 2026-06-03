@@ -825,6 +825,41 @@ body {
   padding: 4px 0;
 }
 
+/* === SPOUSE QUESTION === */
+.spouse-question-field {
+  background: var(--blue-light);
+  border: 1.5px solid #c3ddf5;
+  border-radius: var(--radius-sm);
+  padding: 14px 16px;
+  margin-bottom: 20px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.spouse-q-label {
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  color: var(--blue-dark) !important;
+}
+
+/* === SPOUSE COLUMN TOGGLE === */
+.two-party-grid.no-spouse {
+  grid-template-columns: 160px 1fr;
+}
+
+.two-party-grid.no-spouse .spouse-col,
+.medical-table.no-spouse .spouse-col,
+.form-row .spouse-col.hidden {
+  display: none;
+}
+
+.medical-table.no-spouse .medical-header-row,
+.medical-table.no-spouse .medical-row {
+  grid-template-columns: 2fr 1fr;
+}
+
 /* === MEDICAL TABLE === */
 .medical-table {
   width: 100%;
@@ -862,23 +897,28 @@ body {
   font-weight: 500;
 }
 
-.check-cell {
+/* === YES/NO RADIO BUTTONS === */
+.yn-group {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  align-items: center;
+}
+
+.yn-label {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 5px;
   font-size: 13px;
   font-weight: 500;
   color: var(--text-muted);
   cursor: pointer;
-  justify-content: center;
 }
 
-.check-cell input[type="checkbox"] {
-  width: 16px;
-  height: 16px;
+.yn-label input[type="radio"] {
   accent-color: var(--blue);
   cursor: pointer;
-  flex-shrink: 0;
+  width: auto;
 }
 
 /* === MISC FIELDS === */

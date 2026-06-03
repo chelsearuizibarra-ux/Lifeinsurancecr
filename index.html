@@ -82,30 +82,39 @@
           <!-- GENERAL INFORMATION -->
           <div class="form-block">
             <h3 class="block-title">General Information</h3>
-            <div class="two-party-grid">
+
+            <div class="field field-inline spouse-question-field">
+              <label class="spouse-q-label">Do you have a spouse or co-borrower?</label>
+              <div class="radio-group">
+                <label class="radio-label"><input type="radio" name="has_spouse" value="yes" id="has_spouse_yes" /> Yes</label>
+                <label class="radio-label"><input type="radio" name="has_spouse" value="no" id="has_spouse_no" checked /> No</label>
+              </div>
+            </div>
+
+            <div class="two-party-grid" id="general-info-grid">
               <div class="party-spacer"></div>
               <div class="party-label">Client</div>
-              <div class="party-label">Spouse / Other</div>
+              <div class="party-label spouse-col">Spouse / Other</div>
 
               <div class="row-label">Name</div>
               <div class="field"><input type="text" name="client_name" placeholder="Full name" /></div>
-              <div class="field"><input type="text" name="spouse_name" placeholder="Full name" /></div>
+              <div class="field spouse-col"><input type="text" name="spouse_name" placeholder="Full name" /></div>
 
               <div class="row-label">Birthday</div>
               <div class="field"><input type="date" id="client_dob" name="client_dob" /></div>
-              <div class="field"><input type="date" id="spouse_dob" name="spouse_dob" /></div>
+              <div class="field spouse-col"><input type="date" id="spouse_dob" name="spouse_dob" /></div>
 
               <div class="row-label">Age</div>
               <div class="field"><input type="number" id="client_age" name="client_age" placeholder="Age" min="0" max="100" /></div>
-              <div class="field"><input type="number" id="spouse_age" name="spouse_age" placeholder="Age" min="0" max="100" /></div>
+              <div class="field spouse-col"><input type="number" id="spouse_age" name="spouse_age" placeholder="Age" min="0" max="100" /></div>
 
               <div class="row-label">Height</div>
               <div class="field"><input type="text" name="client_height" placeholder='e.g. 5&apos;10"' /></div>
-              <div class="field"><input type="text" name="spouse_height" placeholder='e.g. 5&apos;6"' /></div>
+              <div class="field spouse-col"><input type="text" name="spouse_height" placeholder='e.g. 5&apos;6"' /></div>
 
               <div class="row-label">Weight</div>
               <div class="field"><input type="text" name="client_weight" placeholder="e.g. 175 lbs" /></div>
-              <div class="field"><input type="text" name="spouse_weight" placeholder="e.g. 140 lbs" /></div>
+              <div class="field spouse-col"><input type="text" name="spouse_weight" placeholder="e.g. 140 lbs" /></div>
 
               <div class="row-label">Smoker</div>
               <div class="field">
@@ -114,7 +123,7 @@
                   <label class="radio-label"><input type="radio" name="client_smoker" value="yes" /> Yes</label>
                 </div>
               </div>
-              <div class="field">
+              <div class="field spouse-col">
                 <div class="radio-group">
                   <label class="radio-label"><input type="radio" name="spouse_smoker" value="no" checked /> No</label>
                   <label class="radio-label"><input type="radio" name="spouse_smoker" value="yes" /> Yes</label>
@@ -126,56 +135,110 @@
           <!-- MEDICAL CONCERNS -->
           <div class="form-block">
             <h3 class="block-title">Medical Concerns</h3>
-            <div class="medical-table">
+            <div class="medical-table" id="medical-table">
               <div class="medical-header-row">
                 <div>Condition</div>
                 <div>Client</div>
-                <div>Spouse / Other</div>
+                <div class="spouse-col">Spouse / Other</div>
               </div>
               <div class="medical-row">
                 <span>High Blood Pressure</span>
-                <label class="check-cell"><input type="checkbox" name="client_hbp" /> Yes</label>
-                <label class="check-cell"><input type="checkbox" name="spouse_hbp" /> Yes</label>
+                <div class="yn-group">
+                  <label class="yn-label"><input type="radio" name="client_hbp" value="yes" /> Yes</label>
+                  <label class="yn-label"><input type="radio" name="client_hbp" value="no" checked /> No</label>
+                </div>
+                <div class="yn-group spouse-col">
+                  <label class="yn-label"><input type="radio" name="spouse_hbp" value="yes" /> Yes</label>
+                  <label class="yn-label"><input type="radio" name="spouse_hbp" value="no" checked /> No</label>
+                </div>
               </div>
               <div class="medical-row">
                 <span>Heart Attack</span>
-                <label class="check-cell"><input type="checkbox" name="client_heart_attack" /> Yes</label>
-                <label class="check-cell"><input type="checkbox" name="spouse_heart_attack" /> Yes</label>
+                <div class="yn-group">
+                  <label class="yn-label"><input type="radio" name="client_heart_attack" value="yes" /> Yes</label>
+                  <label class="yn-label"><input type="radio" name="client_heart_attack" value="no" checked /> No</label>
+                </div>
+                <div class="yn-group spouse-col">
+                  <label class="yn-label"><input type="radio" name="spouse_heart_attack" value="yes" /> Yes</label>
+                  <label class="yn-label"><input type="radio" name="spouse_heart_attack" value="no" checked /> No</label>
+                </div>
               </div>
               <div class="medical-row">
                 <span>Stroke</span>
-                <label class="check-cell"><input type="checkbox" name="client_stroke" /> Yes</label>
-                <label class="check-cell"><input type="checkbox" name="spouse_stroke" /> Yes</label>
+                <div class="yn-group">
+                  <label class="yn-label"><input type="radio" name="client_stroke" value="yes" /> Yes</label>
+                  <label class="yn-label"><input type="radio" name="client_stroke" value="no" checked /> No</label>
+                </div>
+                <div class="yn-group spouse-col">
+                  <label class="yn-label"><input type="radio" name="spouse_stroke" value="yes" /> Yes</label>
+                  <label class="yn-label"><input type="radio" name="spouse_stroke" value="no" checked /> No</label>
+                </div>
               </div>
               <div class="medical-row">
                 <span>Cancer</span>
-                <label class="check-cell"><input type="checkbox" name="client_cancer" /> Yes</label>
-                <label class="check-cell"><input type="checkbox" name="spouse_cancer" /> Yes</label>
+                <div class="yn-group">
+                  <label class="yn-label"><input type="radio" name="client_cancer" value="yes" /> Yes</label>
+                  <label class="yn-label"><input type="radio" name="client_cancer" value="no" checked /> No</label>
+                </div>
+                <div class="yn-group spouse-col">
+                  <label class="yn-label"><input type="radio" name="spouse_cancer" value="yes" /> Yes</label>
+                  <label class="yn-label"><input type="radio" name="spouse_cancer" value="no" checked /> No</label>
+                </div>
               </div>
               <div class="medical-row">
                 <span>Diabetes</span>
-                <label class="check-cell"><input type="checkbox" name="client_diabetes" /> Yes</label>
-                <label class="check-cell"><input type="checkbox" name="spouse_diabetes" /> Yes</label>
+                <div class="yn-group">
+                  <label class="yn-label"><input type="radio" name="client_diabetes" value="yes" /> Yes</label>
+                  <label class="yn-label"><input type="radio" name="client_diabetes" value="no" checked /> No</label>
+                </div>
+                <div class="yn-group spouse-col">
+                  <label class="yn-label"><input type="radio" name="spouse_diabetes" value="yes" /> Yes</label>
+                  <label class="yn-label"><input type="radio" name="spouse_diabetes" value="no" checked /> No</label>
+                </div>
               </div>
               <div class="medical-row">
                 <span>High Cholesterol</span>
-                <label class="check-cell"><input type="checkbox" name="client_cholesterol" /> Yes</label>
-                <label class="check-cell"><input type="checkbox" name="spouse_cholesterol" /> Yes</label>
+                <div class="yn-group">
+                  <label class="yn-label"><input type="radio" name="client_cholesterol" value="yes" /> Yes</label>
+                  <label class="yn-label"><input type="radio" name="client_cholesterol" value="no" checked /> No</label>
+                </div>
+                <div class="yn-group spouse-col">
+                  <label class="yn-label"><input type="radio" name="spouse_cholesterol" value="yes" /> Yes</label>
+                  <label class="yn-label"><input type="radio" name="spouse_cholesterol" value="no" checked /> No</label>
+                </div>
               </div>
               <div class="medical-row">
                 <span>DUI / Substance Abuse</span>
-                <label class="check-cell"><input type="checkbox" name="client_dui" /> Yes</label>
-                <label class="check-cell"><input type="checkbox" name="spouse_dui" /> Yes</label>
+                <div class="yn-group">
+                  <label class="yn-label"><input type="radio" name="client_dui" value="yes" /> Yes</label>
+                  <label class="yn-label"><input type="radio" name="client_dui" value="no" checked /> No</label>
+                </div>
+                <div class="yn-group spouse-col">
+                  <label class="yn-label"><input type="radio" name="spouse_dui" value="yes" /> Yes</label>
+                  <label class="yn-label"><input type="radio" name="spouse_dui" value="no" checked /> No</label>
+                </div>
               </div>
               <div class="medical-row">
                 <span>Any Surgeries or Diseases</span>
-                <label class="check-cell"><input type="checkbox" name="client_surgery" /> Yes</label>
-                <label class="check-cell"><input type="checkbox" name="spouse_surgery" /> Yes</label>
+                <div class="yn-group">
+                  <label class="yn-label"><input type="radio" name="client_surgery" value="yes" /> Yes</label>
+                  <label class="yn-label"><input type="radio" name="client_surgery" value="no" checked /> No</label>
+                </div>
+                <div class="yn-group spouse-col">
+                  <label class="yn-label"><input type="radio" name="spouse_surgery" value="yes" /> Yes</label>
+                  <label class="yn-label"><input type="radio" name="spouse_surgery" value="no" checked /> No</label>
+                </div>
               </div>
               <div class="medical-row">
                 <span>Accidents in the Past 10 Years</span>
-                <label class="check-cell"><input type="checkbox" name="client_accidents" /> Yes</label>
-                <label class="check-cell"><input type="checkbox" name="spouse_accidents" /> Yes</label>
+                <div class="yn-group">
+                  <label class="yn-label"><input type="radio" name="client_accidents" value="yes" /> Yes</label>
+                  <label class="yn-label"><input type="radio" name="client_accidents" value="no" checked /> No</label>
+                </div>
+                <div class="yn-group spouse-col">
+                  <label class="yn-label"><input type="radio" name="spouse_accidents" value="yes" /> Yes</label>
+                  <label class="yn-label"><input type="radio" name="spouse_accidents" value="no" checked /> No</label>
+                </div>
               </div>
             </div>
           </div>
@@ -188,7 +251,7 @@
                 <label>Client — Current Medications</label>
                 <textarea name="client_medications" placeholder="List any current medications…" rows="3"></textarea>
               </div>
-              <div class="field">
+              <div class="field spouse-col">
                 <label>Spouse / Other — Current Medications</label>
                 <textarea name="spouse_medications" placeholder="List any current medications…" rows="3"></textarea>
               </div>
@@ -227,15 +290,15 @@
             <div class="two-party-grid">
               <div class="party-spacer"></div>
               <div class="party-label">Client</div>
-              <div class="party-label">Spouse / Other</div>
+              <div class="party-label spouse-col">Spouse / Other</div>
 
               <div class="row-label">Occupation</div>
               <div class="field"><input type="text" name="client_occupation" placeholder="e.g. Teacher" /></div>
-              <div class="field"><input type="text" name="spouse_occupation" placeholder="e.g. Nurse" /></div>
+              <div class="field spouse-col"><input type="text" name="spouse_occupation" placeholder="e.g. Nurse" /></div>
 
               <div class="row-label">Schedule</div>
               <div class="field"><input type="text" name="client_schedule" placeholder="e.g. Mon–Fri 9–5" /></div>
-              <div class="field"><input type="text" name="spouse_schedule" placeholder="e.g. Weekends" /></div>
+              <div class="field spouse-col"><input type="text" name="spouse_schedule" placeholder="e.g. Weekends" /></div>
             </div>
 
             <div class="misc-fields">
