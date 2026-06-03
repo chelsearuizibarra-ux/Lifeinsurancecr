@@ -62,7 +62,6 @@ function buildPayload(form) {
     coverageAmount: fd.get('coverageAmount') || '',
     coverageType:   fd.get('coverageType') || '',
     tobaccoUser:    tobacco,
-    directionsToHome: fd.get('directionsToHome') || '',
     source:         'lifeinsurancecr.com',
     formLocation:   form.dataset.form || 'unknown',
     submittedAt:    new Date().toISOString(),
