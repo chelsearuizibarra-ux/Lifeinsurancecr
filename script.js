@@ -1,4 +1,6 @@
-const GHL_WEBHOOK = 'https://services.leadconnectorhq.com/hooks/Blj7F6WujktAsuRCp9oG/webhook-trigger/53b83a3e-ad8c-45d4-8056-443675be36c4';
+// Paste your Google Apps Script Web App URL here after setup
+// See setup instructions at the bottom of this file
+const SHEETS_URL = 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE';
 
 // --- Navbar scroll effect ---
 const navbar = document.getElementById('navbar');
@@ -124,6 +126,8 @@ function buildPayload(form) {
     hasSpouse:            fd.get('has_spouse') || 'no',
     email:                fd.get('email') || '',
     phone:                fd.get('phone') || '',
+    clientEmail:          fd.get('client_email_2') || fd.get('email') || '',
+    spouseEmail:          fd.get('spouse_email') || '',
 
     // Client general info
     clientName:           fd.get('client_name') || '',
@@ -177,15 +181,15 @@ function buildPayload(form) {
   };
 }
 
-// --- Submit to GHL webhook ---
-async function submitToGHL(payload) {
-  const response = await fetch(GHL_WEBHOOK, {
+// --- Submit to Google Sheets via Apps Script ---
+async function submitToSheets(payload) {
+  await fetch(SHEETS_URL, {
     method: 'POST',
+    mode: 'no-cors',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(payload),
   });
-  if (!response.ok) throw new Error(`Webhook responded with status ${response.status}`);
-  return response;
+  // no-cors means we can't read the response, but data is sent
 }
 
 // --- Handle form submission ---
@@ -217,7 +221,7 @@ async function handleFormSubmit(e) {
 
   try {
     const payload = buildPayload(form);
-    await submitToGHL(payload);
+    await submitToSheets(payload);
 
     form.hidden = true;
     if (successEl) successEl.hidden = false;
@@ -271,3 +275,47 @@ if (stickyCta && intakeSection && window.IntersectionObserver) {
   }, { threshold: 0.1 });
   observer.observe(intakeSection);
 }
+
+/*
+=== GOOGLE SHEETS SETUP INSTRUCTIONS ===
+
+1. Go to sheets.google.com and create a new spreadsheet.
+   Name the first sheet "Leads".
+
+2. Go to Extensions → Apps Script.
+
+3. Delete any existing code and paste this:
+
+function doPost(e) {
+  try {
+    var data = JSON.parse(e.postData.contents);
+    var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Leads');
+
+    // Write headers on first submission
+    if (sheet.getLastRow() === 0) {
+      sheet.appendRow(Object.keys(data));
+    }
+
+    sheet.appendRow(Object.values(data));
+
+    return ContentService
+      .createTextOutput(JSON.stringify({ status: 'ok' }))
+      .setMimeType(ContentService.MimeType.JSON);
+  } catch(err) {
+    return ContentService
+      .createTextOutput(JSON.stringify({ status: 'error', message: err.toString() }))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+}
+
+4. Click Deploy → New Deployment.
+   - Type: Web app
+   - Execute as: Me
+   - Who has access: Anyone
+   - Click Deploy and copy the Web App URL.
+
+5. Replace 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE' at the top of this
+   file with the URL you just copied.
+
+6. Save and push to GitHub — your form will now write to Google Sheets.
+*/
