@@ -96,24 +96,24 @@
               <div class="party-label">Client</div>
               <div class="party-label spouse-col">Spouse / Other</div>
 
-              <div class="row-label">Name</div>
-              <div class="field"><input type="text" name="client_name" placeholder="Full name" /></div>
+              <div class="row-label">Name *</div>
+              <div class="field"><input type="text" name="client_name" placeholder="Full name" required /></div>
               <div class="field spouse-col"><input type="text" name="spouse_name" placeholder="Full name" /></div>
 
-              <div class="row-label">Birthday</div>
-              <div class="field"><input type="date" id="client_dob" name="client_dob" /></div>
+              <div class="row-label">Birthday *</div>
+              <div class="field"><input type="date" id="client_dob" name="client_dob" required /></div>
               <div class="field spouse-col"><input type="date" id="spouse_dob" name="spouse_dob" /></div>
 
-              <div class="row-label">Age</div>
-              <div class="field"><input type="number" id="client_age" name="client_age" placeholder="Age" min="0" max="100" /></div>
+              <div class="row-label">Age *</div>
+              <div class="field"><input type="number" id="client_age" name="client_age" placeholder="Age" min="0" max="100" required /></div>
               <div class="field spouse-col"><input type="number" id="spouse_age" name="spouse_age" placeholder="Age" min="0" max="100" /></div>
 
-              <div class="row-label">Height</div>
-              <div class="field"><input type="text" name="client_height" placeholder='e.g. 5&apos;10"' /></div>
+              <div class="row-label">Height *</div>
+              <div class="field"><input type="text" name="client_height" placeholder='e.g. 5&apos;10"' required /></div>
               <div class="field spouse-col"><input type="text" name="spouse_height" placeholder='e.g. 5&apos;6"' /></div>
 
-              <div class="row-label">Weight</div>
-              <div class="field"><input type="text" name="client_weight" placeholder="e.g. 175 lbs" /></div>
+              <div class="row-label">Weight *</div>
+              <div class="field"><input type="text" name="client_weight" placeholder="e.g. 175 lbs" required /></div>
               <div class="field spouse-col"><input type="text" name="spouse_weight" placeholder="e.g. 140 lbs" /></div>
 
               <div class="row-label">Smoker</div>
@@ -248,8 +248,8 @@
             <h3 class="block-title">Medications</h3>
             <div class="form-row">
               <div class="field">
-                <label>Client — Current Medications</label>
-                <textarea name="client_medications" placeholder="List any current medications…" rows="3"></textarea>
+                <label>Client — Current Medications *</label>
+                <textarea name="client_medications" placeholder="List any current medications, or write 'None'" rows="3" required></textarea>
               </div>
               <div class="field spouse-col">
                 <label>Spouse / Other — Current Medications</label>
@@ -263,22 +263,22 @@
             <h3 class="block-title">Mortgage Information</h3>
             <div class="form-row">
               <div class="field">
-                <label>Loan Amount</label>
-                <input type="text" name="mortgage_loan_amount" placeholder="e.g. $250,000" />
+                <label>Loan Amount *</label>
+                <input type="text" name="mortgage_loan_amount" placeholder="e.g. $250,000" required />
               </div>
               <div class="field">
-                <label>Mortgage Term</label>
-                <input type="text" name="mortgage_term" placeholder="e.g. 30 years" />
+                <label>Mortgage Term *</label>
+                <input type="text" name="mortgage_term" placeholder="e.g. 30 years" required />
               </div>
             </div>
             <div class="form-row">
               <div class="field">
-                <label>Lender</label>
-                <input type="text" name="mortgage_lender" placeholder="e.g. Wells Fargo" />
+                <label>Lender *</label>
+                <input type="text" name="mortgage_lender" placeholder="e.g. Wells Fargo" required />
               </div>
               <div class="field">
-                <label>Monthly Payment</label>
-                <input type="text" name="mortgage_monthly_payment" placeholder="e.g. $1,450/mo" />
+                <label>Monthly Payment *</label>
+                <input type="text" name="mortgage_monthly_payment" placeholder="e.g. $1,450/mo" required />
               </div>
             </div>
           </div>
@@ -292,19 +292,19 @@
               <div class="party-label">Client</div>
               <div class="party-label spouse-col">Spouse / Other</div>
 
-              <div class="row-label">Occupation</div>
-              <div class="field"><input type="text" name="client_occupation" placeholder="e.g. Teacher" /></div>
+              <div class="row-label">Occupation *</div>
+              <div class="field"><input type="text" name="client_occupation" placeholder="e.g. Teacher" required /></div>
               <div class="field spouse-col"><input type="text" name="spouse_occupation" placeholder="e.g. Nurse" /></div>
 
-              <div class="row-label">Schedule</div>
-              <div class="field"><input type="text" name="client_schedule" placeholder="e.g. Mon–Fri 9–5" /></div>
+              <div class="row-label">Schedule *</div>
+              <div class="field"><input type="text" name="client_schedule" placeholder="e.g. Mon–Fri 9–5" required /></div>
               <div class="field spouse-col"><input type="text" name="spouse_schedule" placeholder="e.g. Weekends" /></div>
             </div>
 
             <div class="misc-fields">
               <div class="field">
-                <label>Beneficiary Full Name &amp; Relationship</label>
-                <input type="text" name="beneficiary" placeholder="e.g. John Smith — Spouse" />
+                <label>Beneficiary Full Name &amp; Relationship *</label>
+                <input type="text" name="beneficiary" placeholder="e.g. John Smith — Spouse" required />
               </div>
 
               <div class="field field-inline children-field">
@@ -316,13 +316,13 @@
               </div>
 
               <div class="field children-ages-field" id="children_ages_field" hidden>
-                <label>Children's Ages</label>
-                <input type="text" name="children_ages" placeholder="e.g. 5, 8, 12" />
+                <label>Children's Ages *</label>
+                <input type="text" id="children_ages_input" name="children_ages" placeholder="e.g. 5, 8, 12" />
               </div>
 
               <div class="field">
-                <label>Appointment Date &amp; Time</label>
-                <input type="datetime-local" name="appointment_datetime" />
+                <label>Appointment Date &amp; Time *</label>
+                <input type="datetime-local" name="appointment_datetime" required />
               </div>
             </div>
           </div>

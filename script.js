@@ -84,11 +84,13 @@ document.querySelectorAll('input[name="has_spouse"]').forEach(radio => {
 // Initialize spouse visibility on load (default = No)
 applySpouseVisibility(false);
 
-// --- Show/hide children ages field ---
+// --- Show/hide children ages field + toggle required ---
 document.querySelectorAll('input[name="has_children"]').forEach(radio => {
   radio.addEventListener('change', () => {
     const field = document.getElementById('children_ages_field');
+    const input = document.getElementById('children_ages_input');
     if (field) field.hidden = radio.value !== 'yes';
+    if (input) input.required = radio.value === 'yes';
   });
 });
 
