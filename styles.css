@@ -1040,8 +1040,69 @@ body {
 .footer-inner {
   padding: 48px 20px;
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
-  gap: 48px;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 40px;
+}
+
+.footer-legal {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.footer-legal h4 {
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 6px;
+}
+
+.footer-legal a {
+  font-size: 14px;
+  color: #7dd3fc;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+}
+
+.footer-legal a:hover { color: var(--white); text-decoration: underline; }
+
+.footer-legal-note {
+  font-size: 12px;
+  opacity: 0.45;
+  line-height: 1.5;
+  margin-top: 8px;
+}
+
+/* === LEGAL CALLOUT in form === */
+.legal-callout {
+  background: #fffbeb;
+  border: 1.5px solid #fcd34d;
+  border-radius: var(--radius-sm);
+  padding: 14px 16px;
+  margin-bottom: 16px;
+}
+
+.legal-callout-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: #92400e;
+  margin-bottom: 6px;
+}
+
+.legal-callout p:last-child {
+  font-size: 13px;
+  color: #78350f;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.legal-callout a {
+  color: #1a6fb4;
+  font-weight: 600;
+  text-decoration: underline;
 }
 
 .footer-brand .logo {
@@ -1210,8 +1271,8 @@ body {
   }
 
   .footer-inner {
-    grid-template-columns: 1fr;
-    gap: 32px;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
   }
 
   .trust-inner {
