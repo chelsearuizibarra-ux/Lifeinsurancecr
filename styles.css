@@ -921,6 +921,97 @@ body {
   width: auto;
 }
 
+/* === YOU vs SPOUSE COLOR CODING === */
+/* Spouse column header pill turns green */
+.party-label-spouse {
+  background: #059669;
+}
+
+/* Medical table header: "You" = blue tint, "Spouse" = green tint */
+.medical-header-row > div:nth-child(2) {
+  color: var(--blue);
+  font-weight: 800;
+  background: rgba(26, 111, 180, 0.12);
+  border-radius: 4px;
+  text-align: center;
+  padding: 4px 8px;
+}
+
+.medical-header-row > div:nth-child(3) {
+  color: #059669;
+  font-weight: 800;
+  background: rgba(5, 150, 105, 0.12);
+  border-radius: 4px;
+  text-align: center;
+  padding: 4px 8px;
+}
+
+/* Medical rows: "You" column = light blue cell, "Spouse" column = light green cell */
+.medical-row .yn-group:first-of-type {
+  background: rgba(26, 111, 180, 0.06);
+  border-radius: 6px;
+  padding: 5px 8px;
+}
+
+.medical-row .yn-group:last-of-type {
+  background: rgba(5, 150, 105, 0.06);
+  border-radius: 6px;
+  padding: 5px 8px;
+}
+
+/* Medication panel cards */
+.med-panel-card {
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.med-panel-card-you {
+  border: 2px solid rgba(26, 111, 180, 0.35);
+}
+
+.med-panel-card-spouse {
+  border: 2px solid rgba(5, 150, 105, 0.35);
+}
+
+.med-panel-card-header {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+  padding: 7px 14px;
+}
+
+.med-panel-card-you .med-panel-card-header {
+  background: var(--blue);
+  color: white;
+}
+
+.med-panel-card-spouse .med-panel-card-header {
+  background: #059669;
+  color: white;
+}
+
+.med-panel-card textarea {
+  border: none;
+  border-top: 1.5px solid var(--border);
+  border-radius: 0;
+  padding: 11px 14px;
+  font-family: inherit;
+  font-size: 14px;
+  resize: vertical;
+  width: 100%;
+  min-height: 90px;
+  color: var(--text);
+  background: white;
+}
+
+.med-panel-card textarea:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(26, 111, 180, 0.15) inset;
+}
+
 /* === MISC FIELDS === */
 .misc-fields {
   display: flex;

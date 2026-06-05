@@ -96,7 +96,7 @@
             <div class="two-party-grid" id="general-info-grid">
               <div class="party-spacer"></div>
               <div class="party-label">You</div>
-              <div class="party-label spouse-col">Spouse / Other</div>
+              <div class="party-label party-label-spouse spouse-col">Spouse / Other</div>
 
               <div class="row-label">Name *</div>
               <div class="field"><input type="text" name="client_name" placeholder="Full name" required /></div>
@@ -254,12 +254,16 @@
             <h3 class="block-title">Medications</h3>
             <div class="form-row">
               <div class="field">
-                <label>Current Medications *</label>
-                <textarea name="client_medications" placeholder="List any current medications, or write 'None'" rows="3" required></textarea>
+                <div class="med-panel-card med-panel-card-you">
+                  <div class="med-panel-card-header">Your Medications *</div>
+                  <textarea name="client_medications" placeholder="List any current medications, or write 'None'" rows="3" required></textarea>
+                </div>
               </div>
               <div class="field spouse-col">
-                <label>Spouse / Other Medications</label>
-                <textarea name="spouse_medications" placeholder="List any current medications, or write 'None'" rows="3"></textarea>
+                <div class="med-panel-card med-panel-card-spouse">
+                  <div class="med-panel-card-header">Spouse's Medications</div>
+                  <textarea name="spouse_medications" placeholder="List any current medications, or write 'None'" rows="3"></textarea>
+                </div>
               </div>
             </div>
           </div>
@@ -296,7 +300,7 @@
             <div class="two-party-grid">
               <div class="party-spacer"></div>
               <div class="party-label">You</div>
-              <div class="party-label spouse-col">Spouse / Other</div>
+              <div class="party-label party-label-spouse spouse-col">Spouse / Other</div>
 
               <div class="row-label">Occupation *</div>
               <div class="field"><input type="text" name="client_occupation" placeholder="e.g. Teacher" required /></div>
