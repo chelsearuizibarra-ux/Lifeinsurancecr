@@ -225,6 +225,10 @@ async function handleFormSubmit(e) {
     form.hidden = true;
     if (successEl) successEl.hidden = false;
 
+    // Show success modal
+    const modal = document.getElementById('success-modal');
+    if (modal) modal.hidden = false;
+
     if (typeof gtag === 'function') {
       gtag('event', 'generate_lead', { event_category: 'Lead', event_label: form.dataset.form });
     }
@@ -273,6 +277,17 @@ if (stickyCta && intakeSection && window.IntersectionObserver) {
     stickyCta.style.display = entry.isIntersecting ? 'none' : '';
   }, { threshold: 0.1 });
   observer.observe(intakeSection);
+}
+
+// --- Success modal close ---
+const modalCloseBtn = document.getElementById('modal-close-btn');
+const successModal = document.getElementById('success-modal');
+
+if (modalCloseBtn && successModal) {
+  modalCloseBtn.addEventListener('click', () => { successModal.hidden = true; });
+  successModal.addEventListener('click', e => {
+    if (e.target === successModal) successModal.hidden = true;
+  });
 }
 
 /*
