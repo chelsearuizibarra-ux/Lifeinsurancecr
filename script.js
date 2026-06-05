@@ -1,6 +1,4 @@
-// Paste your Google Apps Script Web App URL here after setup
-// See setup instructions at the bottom of this file
-const SHEETS_URL = 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE';
+const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbzPCAxJYmvJsMFZ_o6WzdihrjdEz_7MnxQzhmMbmDK0yaDniJmIFbSoLYcxFe9dxzUy8g/exec';
 
 // --- Navbar scroll effect ---
 const navbar = document.getElementById('navbar');
