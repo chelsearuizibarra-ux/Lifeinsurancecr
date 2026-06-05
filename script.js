@@ -124,7 +124,7 @@ function buildPayload(form) {
     hasSpouse:            fd.get('has_spouse') || 'no',
     email:                fd.get('email') || '',
     phone:                fd.get('phone') || '',
-    clientEmail:          fd.get('client_email_2') || fd.get('email') || '',
+    clientEmail:          fd.get('email') || '',
     spouseEmail:          fd.get('spouse_email') || '',
 
     // Client general info
