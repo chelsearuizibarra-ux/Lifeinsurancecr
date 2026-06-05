@@ -165,7 +165,7 @@ function buildPayload(form) {
     beneficiary:          fd.get('beneficiary') || '',
     hasChildren:          fd.get('has_children') || 'no',
     childrenAges:         fd.get('children_ages') || '',
-    appointmentDatetime:  fd.get('appointment_datetime') || '',
+    appointmentPreference: fd.get('appointment_preference') || '',
 
     // SMS consent (two separate A2P-compliant checkboxes)
     smsConsentNonMarketing: form.querySelector('input[name="smsConsentNonMarketing"]')?.checked ? 'yes' : 'no',

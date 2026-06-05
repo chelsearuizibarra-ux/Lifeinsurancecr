@@ -334,8 +334,14 @@
               </div>
 
               <div class="field">
-                <label>Appointment Date &amp; Time *</label>
-                <input type="datetime-local" name="appointment_datetime" required />
+                <label>Appointment Preference *</label>
+                <select name="appointment_preference" required>
+                  <option value="">Select a preferred time...</option>
+                  <option value="Mornings (9am–12pm)">Mornings (9am–12pm)</option>
+                  <option value="Afternoons (12pm–5pm)">Afternoons (12pm–5pm)</option>
+                  <option value="Evenings (5pm–8pm)">Evenings (5pm–8pm)</option>
+                  <option value="Flexible / Any time">Flexible / Any time</option>
+                </select>
               </div>
             </div>
           </div>
