@@ -73,384 +73,362 @@
     </div>
   </section>
 
-  <!-- FULL INTAKE FORM -->
+  <!-- MULTI-STEP QUOTE WIZARD -->
   <section class="intake-section" id="hero-form">
     <div class="container">
       <div class="intake-header">
-        <h2>Request Your Free Life Insurance Quote</h2>
-        <p>Complete the form below and a licensed agent will contact you within 24 hours with your personalized options.</p>
+        <h2>Get Your Free Mortgage Protection Quote</h2>
+        <p>Takes about 2 minutes — no obligation, no home visits.</p>
       </div>
 
-      <div class="intake-card">
-        <form id="lead-form-main" class="intake-form" data-form="main">
+      <div class="intake-card wizard-card">
+        <form id="lead-form-main" class="intake-form wizard-form" data-form="main" novalidate>
 
-          <!-- CONTACT INFORMATION -->
-          <div class="form-block">
-            <h3 class="block-title">Contact Information</h3>
-            <div class="form-row">
-              <div class="field">
-                <label for="email">Email Address *</label>
-                <input type="email" id="email" name="email" placeholder="jane@example.com" required autocomplete="email" />
+          <!-- Hidden radio inputs preserved for Google Sheets payload compatibility -->
+          <div style="display:none" aria-hidden="true">
+            <input type="radio" name="client_hbp" value="no" id="r_client_hbp_no" checked><input type="radio" name="client_hbp" value="yes" id="r_client_hbp_yes">
+            <input type="radio" name="client_heart_attack" value="no" id="r_client_heart_attack_no" checked><input type="radio" name="client_heart_attack" value="yes" id="r_client_heart_attack_yes">
+            <input type="radio" name="client_stroke" value="no" id="r_client_stroke_no" checked><input type="radio" name="client_stroke" value="yes" id="r_client_stroke_yes">
+            <input type="radio" name="client_cancer" value="no" id="r_client_cancer_no" checked><input type="radio" name="client_cancer" value="yes" id="r_client_cancer_yes">
+            <input type="radio" name="client_diabetes" value="no" id="r_client_diabetes_no" checked><input type="radio" name="client_diabetes" value="yes" id="r_client_diabetes_yes">
+            <input type="radio" name="client_cholesterol" value="no" id="r_client_cholesterol_no" checked><input type="radio" name="client_cholesterol" value="yes" id="r_client_cholesterol_yes">
+            <input type="radio" name="client_dui" value="no" id="r_client_dui_no" checked><input type="radio" name="client_dui" value="yes" id="r_client_dui_yes">
+            <input type="radio" name="client_surgery" value="no" id="r_client_surgery_no" checked><input type="radio" name="client_surgery" value="yes" id="r_client_surgery_yes">
+            <input type="radio" name="client_accidents" value="no" id="r_client_accidents_no" checked><input type="radio" name="client_accidents" value="yes" id="r_client_accidents_yes">
+            <input type="radio" name="spouse_hbp" value="no" id="r_spouse_hbp_no" checked><input type="radio" name="spouse_hbp" value="yes" id="r_spouse_hbp_yes">
+            <input type="radio" name="spouse_heart_attack" value="no" id="r_spouse_heart_attack_no" checked><input type="radio" name="spouse_heart_attack" value="yes" id="r_spouse_heart_attack_yes">
+            <input type="radio" name="spouse_stroke" value="no" id="r_spouse_stroke_no" checked><input type="radio" name="spouse_stroke" value="yes" id="r_spouse_stroke_yes">
+            <input type="radio" name="spouse_cancer" value="no" id="r_spouse_cancer_no" checked><input type="radio" name="spouse_cancer" value="yes" id="r_spouse_cancer_yes">
+            <input type="radio" name="spouse_diabetes" value="no" id="r_spouse_diabetes_no" checked><input type="radio" name="spouse_diabetes" value="yes" id="r_spouse_diabetes_yes">
+            <input type="radio" name="spouse_cholesterol" value="no" id="r_spouse_cholesterol_no" checked><input type="radio" name="spouse_cholesterol" value="yes" id="r_spouse_cholesterol_yes">
+            <input type="radio" name="spouse_dui" value="no" id="r_spouse_dui_no" checked><input type="radio" name="spouse_dui" value="yes" id="r_spouse_dui_yes">
+            <input type="radio" name="spouse_surgery" value="no" id="r_spouse_surgery_no" checked><input type="radio" name="spouse_surgery" value="yes" id="r_spouse_surgery_yes">
+            <input type="radio" name="spouse_accidents" value="no" id="r_spouse_accidents_no" checked><input type="radio" name="spouse_accidents" value="yes" id="r_spouse_accidents_yes">
+            <input type="radio" name="has_spouse" value="no" id="r_has_spouse_no" checked><input type="radio" name="has_spouse" value="yes" id="r_has_spouse_yes">
+            <input type="radio" name="has_children" value="no" id="r_has_children_no" checked><input type="radio" name="has_children" value="yes" id="r_has_children_yes">
+            <input type="radio" name="client_smoker" value="no" id="r_client_smoker_no" checked><input type="radio" name="client_smoker" value="yes" id="r_client_smoker_yes">
+            <input type="radio" name="spouse_smoker" value="no" id="r_spouse_smoker_no" checked><input type="radio" name="spouse_smoker" value="yes" id="r_spouse_smoker_yes">
+          </div>
+
+          <!-- WIZARD HEADER -->
+          <div class="wizard-header">
+            <button type="button" class="wizard-back-btn" id="wizard-back">← Back</button>
+            <div class="wizard-progress-wrap">
+              <div class="wizard-progress-track">
+                <div class="wizard-progress-fill" id="wizard-progress-fill"></div>
               </div>
-              <div class="field">
-                <label for="phone">Phone Number *</label>
-                <input type="tel" id="phone" name="phone" placeholder="(555) 000-0000" required autocomplete="tel" />
-              </div>
+              <span class="wizard-step-label" id="wizard-step-label">Step 1 of 10</span>
             </div>
-            <div class="form-row">
-              <div class="field">
-                <label for="client_state">State *</label>
-                <select id="client_state" name="client_state" required>
-                  <option value="">Select your state...</option>
-                  <option>Alabama</option>
-                  <option>Alaska</option>
-                  <option>Arizona</option>
-                  <option>Arkansas</option>
-                  <option>California</option>
-                  <option>Colorado</option>
-                  <option>Connecticut</option>
-                  <option>Delaware</option>
-                  <option>Florida</option>
-                  <option>Georgia</option>
-                  <option>Hawaii</option>
-                  <option>Idaho</option>
-                  <option>Illinois</option>
-                  <option>Indiana</option>
-                  <option>Iowa</option>
-                  <option>Kansas</option>
-                  <option>Kentucky</option>
-                  <option>Louisiana</option>
-                  <option>Maine</option>
-                  <option>Maryland</option>
-                  <option>Massachusetts</option>
-                  <option>Michigan</option>
-                  <option>Minnesota</option>
-                  <option>Mississippi</option>
-                  <option>Missouri</option>
-                  <option>Montana</option>
-                  <option>Nebraska</option>
-                  <option>Nevada</option>
-                  <option>New Hampshire</option>
-                  <option>New Jersey</option>
-                  <option>New Mexico</option>
-                  <option>New York</option>
-                  <option>North Carolina</option>
-                  <option>North Dakota</option>
-                  <option>Ohio</option>
-                  <option>Oklahoma</option>
-                  <option>Oregon</option>
-                  <option>Pennsylvania</option>
-                  <option>Rhode Island</option>
-                  <option>South Carolina</option>
-                  <option>South Dakota</option>
-                  <option>Tennessee</option>
-                  <option>Texas</option>
-                  <option>Utah</option>
-                  <option>Vermont</option>
-                  <option>Virginia</option>
-                  <option>Washington</option>
-                  <option>West Virginia</option>
-                  <option>Wisconsin</option>
-                  <option>Wyoming</option>
-                  <option>Washington D.C.</option>
-                </select>
+          </div>
+
+          <!-- STEP 1: Mortgage Info -->
+          <div class="wizard-step active" data-step="1">
+            <div class="wizard-step-body">
+              <div class="wizard-icon">🏡</div>
+              <h3 class="wizard-question">Tell us about your mortgage</h3>
+              <p class="wizard-hint">We'll match your protection to your loan amount.</p>
+              <div class="wizard-fields">
+                <div class="field">
+                  <label for="mortgage_loan_amount">Loan Amount *</label>
+                  <input type="text" id="mortgage_loan_amount" name="mortgage_loan_amount" placeholder="e.g. $250,000" />
+                </div>
+                <div class="field">
+                  <label for="mortgage_term">Mortgage Term *</label>
+                  <select id="mortgage_term" name="mortgage_term">
+                    <option value="">Select term...</option>
+                    <option value="10 years">10 years</option>
+                    <option value="15 years">15 years</option>
+                    <option value="20 years">20 years</option>
+                    <option value="25 years">25 years</option>
+                    <option value="30 years">30 years</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label for="mortgage_lender">Lender *</label>
+                  <input type="text" id="mortgage_lender" name="mortgage_lender" placeholder="e.g. Wells Fargo" />
+                </div>
+                <div class="field">
+                  <label for="mortgage_monthly_payment">Monthly Payment *</label>
+                  <input type="text" id="mortgage_monthly_payment" name="mortgage_monthly_payment" placeholder="e.g. $1,450" />
+                </div>
+              </div>
+              <button type="button" class="btn btn-primary btn-full wizard-next-btn">Continue →</button>
+            </div>
+          </div>
+
+          <!-- STEP 2: Name + State -->
+          <div class="wizard-step" data-step="2">
+            <div class="wizard-step-body">
+              <div class="wizard-icon">👤</div>
+              <h3 class="wizard-question">What's your name and where do you live?</h3>
+              <div class="wizard-fields">
+                <div class="field">
+                  <label for="client_name">Full Name *</label>
+                  <input type="text" id="client_name" name="client_name" placeholder="Your full name" />
+                </div>
+                <div class="field">
+                  <label for="client_state">State *</label>
+                  <select id="client_state" name="client_state">
+                    <option value="">Select your state...</option>
+                    <option>Alabama</option><option>Alaska</option><option>Arizona</option><option>Arkansas</option><option>California</option><option>Colorado</option><option>Connecticut</option><option>Delaware</option><option>Florida</option><option>Georgia</option><option>Hawaii</option><option>Idaho</option><option>Illinois</option><option>Indiana</option><option>Iowa</option><option>Kansas</option><option>Kentucky</option><option>Louisiana</option><option>Maine</option><option>Maryland</option><option>Massachusetts</option><option>Michigan</option><option>Minnesota</option><option>Mississippi</option><option>Missouri</option><option>Montana</option><option>Nebraska</option><option>Nevada</option><option>New Hampshire</option><option>New Jersey</option><option>New Mexico</option><option>New York</option><option>North Carolina</option><option>North Dakota</option><option>Ohio</option><option>Oklahoma</option><option>Oregon</option><option>Pennsylvania</option><option>Rhode Island</option><option>South Carolina</option><option>South Dakota</option><option>Tennessee</option><option>Texas</option><option>Utah</option><option>Vermont</option><option>Virginia</option><option>Washington</option><option>West Virginia</option><option>Wisconsin</option><option>Wyoming</option><option>Washington D.C.</option>
+                  </select>
+                </div>
+              </div>
+              <button type="button" class="btn btn-primary btn-full wizard-next-btn">Continue →</button>
+            </div>
+          </div>
+
+          <!-- STEP 3: DOB + Physical -->
+          <div class="wizard-step" data-step="3">
+            <div class="wizard-step-body">
+              <div class="wizard-icon">📋</div>
+              <h3 class="wizard-question">A little about you</h3>
+              <p class="wizard-hint">Used to determine eligibility and rates.</p>
+              <div class="wizard-fields">
+                <div class="field">
+                  <label for="client_dob">Date of Birth *</label>
+                  <input type="date" id="client_dob" name="client_dob" />
+                </div>
+                <input type="hidden" id="client_age" name="client_age" />
+                <div class="field">
+                  <label for="client_height">Height *</label>
+                  <input type="text" id="client_height" name="client_height" placeholder='e.g. 5&apos;10"' />
+                </div>
+                <div class="field">
+                  <label for="client_weight">Weight *</label>
+                  <input type="text" id="client_weight" name="client_weight" placeholder="e.g. 175 lbs" />
+                </div>
+              </div>
+              <button type="button" class="btn btn-primary btn-full wizard-next-btn">Continue →</button>
+            </div>
+          </div>
+
+          <!-- STEP 4: Smoker? (auto-advance) -->
+          <div class="wizard-step" data-step="4">
+            <div class="wizard-step-body">
+              <div class="wizard-icon">🚬</div>
+              <h3 class="wizard-question">Do you currently smoke or use tobacco?</h3>
+              <div class="wizard-big-btns">
+                <button type="button" class="wizard-choice-btn" data-radio="client_smoker" data-value="no">
+                  <span class="choice-icon">✅</span>
+                  <span class="choice-label">No</span>
+                </button>
+                <button type="button" class="wizard-choice-btn" data-radio="client_smoker" data-value="yes">
+                  <span class="choice-icon">🚬</span>
+                  <span class="choice-label">Yes</span>
+                </button>
               </div>
             </div>
           </div>
 
-          <!-- GENERAL INFORMATION -->
-          <div class="form-block">
-            <h3 class="block-title">General Information</h3>
-
-            <div class="field field-inline spouse-question-field">
-              <label class="spouse-q-label">Do you have a spouse or co-borrower?</label>
-              <div class="radio-group">
-                <label class="radio-label"><input type="radio" name="has_spouse" value="yes" id="has_spouse_yes" /> Yes</label>
-                <label class="radio-label"><input type="radio" name="has_spouse" value="no" id="has_spouse_no" checked /> No</label>
-              </div>
-            </div>
-
-            <div class="two-party-grid" id="general-info-grid">
-              <div class="party-spacer"></div>
-              <div class="party-spacer"></div>
-              <div class="party-label party-label-spouse spouse-col">Spouse / Other</div>
-
-              <div class="row-label">Name *</div>
-              <div class="field"><input type="text" name="client_name" placeholder="Full name" required /></div>
-              <div class="field spouse-col"><input type="text" name="spouse_name" placeholder="Full name" /></div>
-
-              <div class="row-label">Birthday *</div>
-              <div class="field"><input type="date" id="client_dob" name="client_dob" required /></div>
-              <div class="field spouse-col"><input type="date" id="spouse_dob" name="spouse_dob" /></div>
-
-              <div class="row-label">Age *</div>
-              <div class="field"><input type="number" id="client_age" name="client_age" placeholder="Age" min="0" max="100" required /></div>
-              <div class="field spouse-col"><input type="number" id="spouse_age" name="spouse_age" placeholder="Age" min="0" max="100" /></div>
-
-              <div class="row-label">Height *</div>
-              <div class="field"><input type="text" name="client_height" placeholder='e.g. 5&apos;10"' required /></div>
-              <div class="field spouse-col"><input type="text" name="spouse_height" placeholder='e.g. 5&apos;6"' /></div>
-
-              <div class="row-label">Weight *</div>
-              <div class="field"><input type="text" name="client_weight" placeholder="e.g. 175 lbs" required /></div>
-              <div class="field spouse-col"><input type="text" name="spouse_weight" placeholder="e.g. 140 lbs" /></div>
-
-              <div class="row-label">Smoker</div>
-              <div class="field">
-                <div class="radio-group">
-                  <label class="radio-label"><input type="radio" name="client_smoker" value="no" checked /> No</label>
-                  <label class="radio-label"><input type="radio" name="client_smoker" value="yes" /> Yes</label>
-                </div>
-              </div>
-              <div class="field spouse-col">
-                <div class="radio-group">
-                  <label class="radio-label"><input type="radio" name="spouse_smoker" value="no" checked /> No</label>
-                  <label class="radio-label"><input type="radio" name="spouse_smoker" value="yes" /> Yes</label>
-                </div>
-              </div>
-            </div>
-
-            <div class="form-row" style="margin-top:12px;">
-              <div class="field spouse-col">
-                <label>Spouse / Other Email</label>
-                <input type="email" name="spouse_email" placeholder="spouse@email.com" />
+          <!-- STEP 5: Spouse? (auto-advance) -->
+          <div class="wizard-step" data-step="5">
+            <div class="wizard-step-body">
+              <div class="wizard-icon">👫</div>
+              <h3 class="wizard-question">Do you have a spouse or co-borrower to include?</h3>
+              <div class="wizard-big-btns">
+                <button type="button" class="wizard-choice-btn" data-radio="has_spouse" data-value="yes">
+                  <span class="choice-icon">👫</span>
+                  <span class="choice-label">Yes</span>
+                </button>
+                <button type="button" class="wizard-choice-btn" data-radio="has_spouse" data-value="no">
+                  <span class="choice-icon">👤</span>
+                  <span class="choice-label">No, just me</span>
+                </button>
               </div>
             </div>
           </div>
 
-          <!-- MEDICAL CONCERNS -->
-          <div class="form-block">
-            <h3 class="block-title">Medical Concerns</h3>
-            <div class="medical-table" id="medical-table">
-              <div class="medical-header-row">
-                <div>Condition</div>
-                <div></div>
-                <div class="spouse-col">Spouse / Other</div>
-              </div>
-              <div class="medical-row">
-                <span>High Blood Pressure</span>
-                <div class="yn-group">
-                  <label class="yn-label"><input type="radio" name="client_hbp" value="yes" /> Yes</label>
-                  <label class="yn-label"><input type="radio" name="client_hbp" value="no" checked /> No</label>
+          <!-- STEP 6: Spouse Details (shown only if has_spouse = yes) -->
+          <div class="wizard-step" data-step="6">
+            <div class="wizard-step-body">
+              <div class="wizard-icon">👤</div>
+              <h3 class="wizard-question">About your spouse or co-borrower</h3>
+              <div class="wizard-fields">
+                <div class="field">
+                  <label for="spouse_name">Full Name *</label>
+                  <input type="text" id="spouse_name" name="spouse_name" placeholder="Spouse's full name" />
                 </div>
-                <div class="yn-group spouse-col">
-                  <label class="yn-label"><input type="radio" name="spouse_hbp" value="yes" /> Yes</label>
-                  <label class="yn-label"><input type="radio" name="spouse_hbp" value="no" checked /> No</label>
+                <div class="field">
+                  <label for="spouse_dob">Date of Birth *</label>
+                  <input type="date" id="spouse_dob" name="spouse_dob" />
                 </div>
-              </div>
-              <div class="medical-row">
-                <span>Heart Attack</span>
-                <div class="yn-group">
-                  <label class="yn-label"><input type="radio" name="client_heart_attack" value="yes" /> Yes</label>
-                  <label class="yn-label"><input type="radio" name="client_heart_attack" value="no" checked /> No</label>
+                <input type="hidden" id="spouse_age" name="spouse_age" />
+                <div class="field">
+                  <label for="spouse_height">Height *</label>
+                  <input type="text" id="spouse_height" name="spouse_height" placeholder='e.g. 5&apos;6"' />
                 </div>
-                <div class="yn-group spouse-col">
-                  <label class="yn-label"><input type="radio" name="spouse_heart_attack" value="yes" /> Yes</label>
-                  <label class="yn-label"><input type="radio" name="spouse_heart_attack" value="no" checked /> No</label>
+                <div class="field">
+                  <label for="spouse_weight">Weight *</label>
+                  <input type="text" id="spouse_weight" name="spouse_weight" placeholder="e.g. 140 lbs" />
                 </div>
-              </div>
-              <div class="medical-row">
-                <span>Stroke</span>
-                <div class="yn-group">
-                  <label class="yn-label"><input type="radio" name="client_stroke" value="yes" /> Yes</label>
-                  <label class="yn-label"><input type="radio" name="client_stroke" value="no" checked /> No</label>
+                <div class="field">
+                  <label>Does your spouse smoke or use tobacco?</label>
+                  <div class="wizard-inline-btns">
+                    <button type="button" class="wizard-choice-btn wizard-choice-sm active" data-radio="spouse_smoker" data-value="no">No</button>
+                    <button type="button" class="wizard-choice-btn wizard-choice-sm" data-radio="spouse_smoker" data-value="yes">Yes</button>
+                  </div>
                 </div>
-                <div class="yn-group spouse-col">
-                  <label class="yn-label"><input type="radio" name="spouse_stroke" value="yes" /> Yes</label>
-                  <label class="yn-label"><input type="radio" name="spouse_stroke" value="no" checked /> No</label>
+                <div class="field">
+                  <label for="spouse_email">Spouse Email (optional)</label>
+                  <input type="email" id="spouse_email" name="spouse_email" placeholder="spouse@email.com" />
                 </div>
               </div>
-              <div class="medical-row">
-                <span>Cancer</span>
-                <div class="yn-group">
-                  <label class="yn-label"><input type="radio" name="client_cancer" value="yes" /> Yes</label>
-                  <label class="yn-label"><input type="radio" name="client_cancer" value="no" checked /> No</label>
-                </div>
-                <div class="yn-group spouse-col">
-                  <label class="yn-label"><input type="radio" name="spouse_cancer" value="yes" /> Yes</label>
-                  <label class="yn-label"><input type="radio" name="spouse_cancer" value="no" checked /> No</label>
-                </div>
-              </div>
-              <div class="medical-row">
-                <span>Diabetes</span>
-                <div class="yn-group">
-                  <label class="yn-label"><input type="radio" name="client_diabetes" value="yes" /> Yes</label>
-                  <label class="yn-label"><input type="radio" name="client_diabetes" value="no" checked /> No</label>
-                </div>
-                <div class="yn-group spouse-col">
-                  <label class="yn-label"><input type="radio" name="spouse_diabetes" value="yes" /> Yes</label>
-                  <label class="yn-label"><input type="radio" name="spouse_diabetes" value="no" checked /> No</label>
-                </div>
-              </div>
-              <div class="medical-row">
-                <span>High Cholesterol</span>
-                <div class="yn-group">
-                  <label class="yn-label"><input type="radio" name="client_cholesterol" value="yes" /> Yes</label>
-                  <label class="yn-label"><input type="radio" name="client_cholesterol" value="no" checked /> No</label>
-                </div>
-                <div class="yn-group spouse-col">
-                  <label class="yn-label"><input type="radio" name="spouse_cholesterol" value="yes" /> Yes</label>
-                  <label class="yn-label"><input type="radio" name="spouse_cholesterol" value="no" checked /> No</label>
-                </div>
-              </div>
-              <div class="medical-row">
-                <span>DUI / Substance Abuse</span>
-                <div class="yn-group">
-                  <label class="yn-label"><input type="radio" name="client_dui" value="yes" /> Yes</label>
-                  <label class="yn-label"><input type="radio" name="client_dui" value="no" checked /> No</label>
-                </div>
-                <div class="yn-group spouse-col">
-                  <label class="yn-label"><input type="radio" name="spouse_dui" value="yes" /> Yes</label>
-                  <label class="yn-label"><input type="radio" name="spouse_dui" value="no" checked /> No</label>
-                </div>
-              </div>
-              <div class="medical-row">
-                <span>Any Surgeries or Diseases</span>
-                <div class="yn-group">
-                  <label class="yn-label"><input type="radio" name="client_surgery" value="yes" /> Yes</label>
-                  <label class="yn-label"><input type="radio" name="client_surgery" value="no" checked /> No</label>
-                </div>
-                <div class="yn-group spouse-col">
-                  <label class="yn-label"><input type="radio" name="spouse_surgery" value="yes" /> Yes</label>
-                  <label class="yn-label"><input type="radio" name="spouse_surgery" value="no" checked /> No</label>
-                </div>
-              </div>
-              <div class="medical-row">
-                <span>Accidents in the Past 10 Years</span>
-                <div class="yn-group">
-                  <label class="yn-label"><input type="radio" name="client_accidents" value="yes" /> Yes</label>
-                  <label class="yn-label"><input type="radio" name="client_accidents" value="no" checked /> No</label>
-                </div>
-                <div class="yn-group spouse-col">
-                  <label class="yn-label"><input type="radio" name="spouse_accidents" value="yes" /> Yes</label>
-                  <label class="yn-label"><input type="radio" name="spouse_accidents" value="no" checked /> No</label>
-                </div>
-              </div>
+              <button type="button" class="btn btn-primary btn-full wizard-next-btn">Continue →</button>
             </div>
           </div>
 
-          <!-- MEDICATIONS -->
-          <div class="form-block">
-            <h3 class="block-title">Medications</h3>
-            <div class="form-row">
-              <div class="field">
-                <div class="med-panel-card med-panel-card-you">
-                  <div class="med-panel-card-header">Your Medications *</div>
-                  <textarea name="client_medications" placeholder="List any current medications, or write 'None'" rows="3" required></textarea>
+          <!-- STEP 7: Medical Concerns -->
+          <div class="wizard-step" data-step="7">
+            <div class="wizard-step-body">
+              <div class="wizard-icon">🏥</div>
+              <h3 class="wizard-question">Any medical history to share?</h3>
+              <p class="wizard-hint">Tap any that apply — this helps us match you to the right plan.</p>
+              <p class="wizard-section-label">Your Health</p>
+              <div class="wizard-conditions-grid">
+                <button type="button" class="condition-toggle" data-field="client_hbp"><span class="condition-check">✓</span>High Blood Pressure</button>
+                <button type="button" class="condition-toggle" data-field="client_heart_attack"><span class="condition-check">✓</span>Heart Attack</button>
+                <button type="button" class="condition-toggle" data-field="client_stroke"><span class="condition-check">✓</span>Stroke</button>
+                <button type="button" class="condition-toggle" data-field="client_cancer"><span class="condition-check">✓</span>Cancer</button>
+                <button type="button" class="condition-toggle" data-field="client_diabetes"><span class="condition-check">✓</span>Diabetes</button>
+                <button type="button" class="condition-toggle" data-field="client_cholesterol"><span class="condition-check">✓</span>High Cholesterol</button>
+                <button type="button" class="condition-toggle" data-field="client_dui"><span class="condition-check">✓</span>DUI / Substance Abuse</button>
+                <button type="button" class="condition-toggle" data-field="client_surgery"><span class="condition-check">✓</span>Surgeries or Diseases</button>
+                <button type="button" class="condition-toggle" data-field="client_accidents"><span class="condition-check">✓</span>Accidents (Past 10 Yrs)</button>
+              </div>
+              <div id="spouse-conditions-wrap" hidden>
+                <hr class="wizard-spouse-divider">
+                <p class="wizard-section-label">Spouse's Health</p>
+                <div class="wizard-conditions-grid">
+                  <button type="button" class="condition-toggle" data-field="spouse_hbp"><span class="condition-check">✓</span>High Blood Pressure</button>
+                  <button type="button" class="condition-toggle" data-field="spouse_heart_attack"><span class="condition-check">✓</span>Heart Attack</button>
+                  <button type="button" class="condition-toggle" data-field="spouse_stroke"><span class="condition-check">✓</span>Stroke</button>
+                  <button type="button" class="condition-toggle" data-field="spouse_cancer"><span class="condition-check">✓</span>Cancer</button>
+                  <button type="button" class="condition-toggle" data-field="spouse_diabetes"><span class="condition-check">✓</span>Diabetes</button>
+                  <button type="button" class="condition-toggle" data-field="spouse_cholesterol"><span class="condition-check">✓</span>High Cholesterol</button>
+                  <button type="button" class="condition-toggle" data-field="spouse_dui"><span class="condition-check">✓</span>DUI / Substance Abuse</button>
+                  <button type="button" class="condition-toggle" data-field="spouse_surgery"><span class="condition-check">✓</span>Surgeries or Diseases</button>
+                  <button type="button" class="condition-toggle" data-field="spouse_accidents"><span class="condition-check">✓</span>Accidents (Past 10 Yrs)</button>
                 </div>
               </div>
-              <div class="field spouse-col">
-                <div class="med-panel-card med-panel-card-spouse">
-                  <div class="med-panel-card-header">Spouse's Medications</div>
-                  <textarea name="spouse_medications" placeholder="List any current medications, or write 'None'" rows="3"></textarea>
-                </div>
-              </div>
+              <button type="button" class="btn btn-primary btn-full wizard-next-btn" style="margin-top:24px;">Continue →</button>
             </div>
           </div>
 
-          <!-- MORTGAGE INFORMATION -->
-          <div class="form-block">
-            <h3 class="block-title">Mortgage Information</h3>
-            <div class="form-row">
-              <div class="field">
-                <label>Loan Amount *</label>
-                <input type="text" name="mortgage_loan_amount" placeholder="e.g. $250,000" required />
-              </div>
-              <div class="field">
-                <label>Mortgage Term *</label>
-                <input type="text" name="mortgage_term" placeholder="e.g. 30 years" required />
-              </div>
-            </div>
-            <div class="form-row">
-              <div class="field">
-                <label>Lender *</label>
-                <input type="text" name="mortgage_lender" placeholder="e.g. Wells Fargo" required />
-              </div>
-              <div class="field">
-                <label>Monthly Payment *</label>
-                <input type="text" name="mortgage_monthly_payment" placeholder="e.g. $1,450/mo" required />
-              </div>
-            </div>
-          </div>
-
-          <!-- MISCELLANEOUS -->
-          <div class="form-block">
-            <h3 class="block-title">Miscellaneous</h3>
-
-            <div class="two-party-grid">
-              <div class="party-spacer"></div>
-              <div class="party-spacer"></div>
-              <div class="party-label party-label-spouse spouse-col">Spouse / Other</div>
-
-              <div class="row-label">Occupation *</div>
-              <div class="field"><input type="text" name="client_occupation" placeholder="e.g. Teacher" required /></div>
-              <div class="field spouse-col"><input type="text" name="spouse_occupation" placeholder="e.g. Nurse" /></div>
-
-              <div class="row-label">Schedule *</div>
-              <div class="field"><input type="text" name="client_schedule" placeholder="e.g. Mon–Fri 9–5" required /></div>
-              <div class="field spouse-col"><input type="text" name="spouse_schedule" placeholder="e.g. Weekends" /></div>
-            </div>
-
-            <div class="misc-fields">
-              <div class="field">
-                <label>Beneficiary Full Name &amp; Relationship *</label>
-                <input type="text" name="beneficiary" placeholder="e.g. John Smith — Spouse" required />
-              </div>
-
-              <div class="field field-inline children-field">
-                <label>Do you have children?</label>
-                <div class="radio-group">
-                  <label class="radio-label"><input type="radio" name="has_children" value="yes" id="children_yes" /> Yes</label>
-                  <label class="radio-label"><input type="radio" name="has_children" value="no" checked /> No</label>
+          <!-- STEP 8: Medications -->
+          <div class="wizard-step" data-step="8">
+            <div class="wizard-step-body">
+              <div class="wizard-icon">💊</div>
+              <h3 class="wizard-question">Any current medications?</h3>
+              <p class="wizard-hint">List any medications, or write "None".</p>
+              <div class="wizard-fields">
+                <div class="field">
+                  <label for="client_medications">Your Medications *</label>
+                  <textarea id="client_medications" name="client_medications" placeholder="e.g. Lisinopril 10mg — or type None" rows="3"></textarea>
+                </div>
+                <div class="field" id="spouse-med-field" hidden>
+                  <label for="spouse_medications">Spouse's Medications</label>
+                  <textarea id="spouse_medications" name="spouse_medications" placeholder="e.g. Metformin — or type None" rows="3"></textarea>
                 </div>
               </div>
-
-              <div class="field children-ages-field" id="children_ages_field" hidden>
-                <label>Children's Ages *</label>
-                <input type="text" id="children_ages_input" name="children_ages" placeholder="e.g. 5, 8, 12" />
-              </div>
-
-              <div class="field">
-                <label>Appointment Preference *</label>
-                <select name="appointment_preference" required>
-                  <option value="">Select a preferred time...</option>
-                  <option value="Mornings (9am–12pm)">Mornings (9am–12pm)</option>
-                  <option value="Afternoons (12pm–5pm)">Afternoons (12pm–5pm)</option>
-                  <option value="Evenings (5pm–8pm)">Evenings (5pm–8pm)</option>
-                  <option value="Flexible / Any time">Flexible / Any time</option>
-                </select>
-              </div>
+              <button type="button" class="btn btn-primary btn-full wizard-next-btn">Continue →</button>
             </div>
           </div>
 
-          <!-- SMS CONSENT + SUBMIT -->
-          <div class="form-block form-block-submit">
-            <div class="legal-callout">
-              <p class="legal-callout-title">📄 Legal &amp; Privacy</p>
-              <p>Before submitting, please review our <a href="privacy-policy.html" target="_blank">Privacy Policy &amp; SMS Terms</a> and <a href="terms.html" target="_blank">Terms &amp; Conditions</a>. By submitting this form you agree to be contacted by a licensed insurance agent. SMS consent below is <strong>optional</strong> and not required to submit.</p>
+          <!-- STEP 9: Life Details -->
+          <div class="wizard-step" data-step="9">
+            <div class="wizard-step-body">
+              <div class="wizard-icon">📝</div>
+              <h3 class="wizard-question">A few more details</h3>
+              <div class="wizard-fields">
+                <div class="field">
+                  <label for="client_occupation">Your Occupation *</label>
+                  <input type="text" id="client_occupation" name="client_occupation" placeholder="e.g. Teacher" />
+                </div>
+                <div class="field">
+                  <label for="client_schedule">Your Availability *</label>
+                  <input type="text" id="client_schedule" name="client_schedule" placeholder="e.g. Mon–Fri 9–5" />
+                </div>
+                <div class="field">
+                  <label for="beneficiary">Beneficiary Name &amp; Relationship *</label>
+                  <input type="text" id="beneficiary" name="beneficiary" placeholder="e.g. John Smith — Spouse" />
+                </div>
+                <div class="field">
+                  <label for="appointment_preference">Preferred Appointment Time *</label>
+                  <select id="appointment_preference" name="appointment_preference">
+                    <option value="">Select a time...</option>
+                    <option value="Mornings (9am–12pm)">Mornings (9am–12pm)</option>
+                    <option value="Afternoons (12pm–5pm)">Afternoons (12pm–5pm)</option>
+                    <option value="Evenings (5pm–8pm)">Evenings (5pm–8pm)</option>
+                    <option value="Flexible / Any time">Flexible / Any time</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label>Do you have children?</label>
+                  <div class="wizard-inline-btns">
+                    <button type="button" class="wizard-choice-btn wizard-choice-sm active" data-radio="has_children" data-value="no">No</button>
+                    <button type="button" class="wizard-choice-btn wizard-choice-sm" data-radio="has_children" data-value="yes">Yes</button>
+                  </div>
+                </div>
+                <div class="field" id="children_ages_field" hidden>
+                  <label for="children_ages_input">Children's Ages</label>
+                  <input type="text" id="children_ages_input" name="children_ages" placeholder="e.g. 5, 8, 12" />
+                </div>
+              </div>
+              <button type="button" class="btn btn-primary btn-full wizard-next-btn">Continue →</button>
             </div>
+          </div>
 
-            <div class="field sms-consent-field">
-              <label class="sms-consent-label">
-                <input type="checkbox" name="smsConsentNonMarketing" value="yes" class="sms-checkbox" />
-                <span>I consent to receive non-marketing text messages from LifeInsuranceCR about insurance quote follow-ups, appointment confirmations, and policy information. Message frequency may vary. Message &amp; data rates may apply. Text HELP for assistance, reply STOP to opt out.</span>
-              </label>
+          <!-- STEP 10: Contact Info -->
+          <div class="wizard-step" data-step="10">
+            <div class="wizard-step-body">
+              <div class="wizard-icon">📞</div>
+              <h3 class="wizard-question">How should we reach you?</h3>
+              <p class="wizard-hint">A licensed agent will send your free quote within 24 hours.</p>
+              <div class="wizard-fields">
+                <div class="field">
+                  <label for="email">Email Address *</label>
+                  <input type="email" id="email" name="email" placeholder="jane@example.com" autocomplete="email" />
+                </div>
+                <div class="field">
+                  <label for="phone">Phone Number *</label>
+                  <input type="tel" id="phone" name="phone" placeholder="(555) 000-0000" autocomplete="tel" />
+                </div>
+              </div>
+              <button type="button" class="btn btn-primary btn-full wizard-next-btn">Continue →</button>
             </div>
+          </div>
 
-            <div class="field sms-consent-field">
-              <label class="sms-consent-label">
-                <input type="checkbox" name="smsConsentMarketing" value="yes" class="sms-checkbox" />
-                <span>I consent to receive marketing text messages, about special offers, discounts, and service updates, from LifeInsuranceCR at the phone number provided. Message frequency may vary. Message &amp; data rates may apply. Text HELP for assistance, reply STOP to opt out.</span>
-              </label>
+          <!-- STEP 11: Consent + Submit -->
+          <div class="wizard-step" data-step="11">
+            <div class="wizard-step-body">
+              <div class="wizard-icon">✅</div>
+              <h3 class="wizard-question">Almost done!</h3>
+              <p class="wizard-hint">By submitting, a licensed agent will contact you within 24 hours with your personalized quote.</p>
+              <div class="legal-callout" style="margin-bottom:16px;">
+                <p class="legal-callout-title">📄 Legal &amp; Privacy</p>
+                <p>By submitting this form you agree to be contacted by a licensed insurance agent. Review our <a href="privacy-policy.html" target="_blank">Privacy Policy &amp; SMS Terms</a> and <a href="terms.html" target="_blank">Terms &amp; Conditions</a>. SMS consent is <strong>optional</strong>.</p>
+              </div>
+              <div class="field sms-consent-field" style="margin-bottom:10px;">
+                <label class="sms-consent-label">
+                  <input type="checkbox" name="smsConsentNonMarketing" value="yes" class="sms-checkbox" />
+                  <span>I consent to receive non-marketing text messages from LifeInsuranceCR about quote follow-ups, appointment confirmations, and policy information. Message &amp; data rates may apply. Reply STOP to opt out.</span>
+                </label>
+              </div>
+              <div class="field sms-consent-field" style="margin-bottom:20px;">
+                <label class="sms-consent-label">
+                  <input type="checkbox" name="smsConsentMarketing" value="yes" class="sms-checkbox" />
+                  <span>I consent to receive marketing text messages about special offers and updates from LifeInsuranceCR. Reply STOP to opt out.</span>
+                </label>
+              </div>
+              <button type="submit" class="btn btn-primary btn-full btn-large">
+                <span class="btn-text">Submit My Quote Request →</span>
+                <span class="btn-loading" hidden>Submitting…</span>
+              </button>
+              <p class="form-disclaimer" style="margin-top:12px;">
+                <a href="privacy-policy.html" target="_blank">Privacy Policy &amp; SMS Terms</a> &nbsp;|&nbsp; <a href="terms.html" target="_blank">Terms &amp; Conditions</a>
+              </p>
             </div>
-
-            <button type="submit" class="btn btn-primary btn-full btn-large">
-              <span class="btn-text">Submit My Quote Request →</span>
-              <span class="btn-loading" hidden>Submitting…</span>
-            </button>
-            <p class="form-disclaimer">
-              <a href="privacy-policy.html" target="_blank">Privacy Policy &amp; SMS Terms</a> &nbsp;|&nbsp; <a href="terms.html" target="_blank">Terms &amp; Conditions</a>
-            </p>
           </div>
 
         </form>

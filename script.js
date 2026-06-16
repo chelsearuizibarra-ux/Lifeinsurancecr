@@ -290,6 +290,166 @@ if (modalCloseBtn && successModal) {
   });
 }
 
+// === MULTI-STEP WIZARD ===
+(function () {
+  const wizardForm = document.querySelector('.wizard-form');
+  if (!wizardForm) return;
+
+  const backBtn = document.getElementById('wizard-back');
+  const progressFill = document.getElementById('wizard-progress-fill');
+  const stepLabel = document.getElementById('wizard-step-label');
+
+  let hasSpouse = false;
+  let currentIdx = 0;
+
+  const stepRequiredFields = {
+    1: ['mortgage_loan_amount', 'mortgage_term', 'mortgage_lender', 'mortgage_monthly_payment'],
+    2: ['client_name', 'client_state'],
+    3: ['client_dob', 'client_height', 'client_weight'],
+    4: [],
+    5: [],
+    6: ['spouse_name', 'spouse_dob', 'spouse_height', 'spouse_weight'],
+    7: [],
+    8: ['client_medications'],
+    9: ['client_occupation', 'client_schedule', 'beneficiary', 'appointment_preference'],
+    10: ['email', 'phone'],
+    11: [],
+  };
+
+  function getStepOrder() {
+    const base = [1, 2, 3, 4, 5];
+    if (hasSpouse) base.push(6);
+    return base.concat([7, 8, 9, 10, 11]);
+  }
+
+  function getStepEl(num) {
+    return wizardForm.querySelector('.wizard-step[data-step="' + num + '"]');
+  }
+
+  function goTo(idx, dir) {
+    const order = getStepOrder();
+    wizardForm.querySelectorAll('.wizard-step').forEach(function (s) {
+      s.classList.remove('active', 'slide-back');
+    });
+    const target = getStepEl(order[idx]);
+    if (!target) return;
+    if (dir === 'back') target.classList.add('slide-back');
+    target.classList.add('active');
+    currentIdx = idx;
+    updateUI(order);
+    const section = document.getElementById('hero-form');
+    if (section) window.scrollTo({ top: section.offsetTop - 80, behavior: 'smooth' });
+  }
+
+  function updateUI(order) {
+    order = order || getStepOrder();
+    const total = order.length;
+    const num = currentIdx + 1;
+    progressFill.style.width = Math.round((num / total) * 100) + '%';
+    stepLabel.textContent = 'Step ' + num + ' of ' + total;
+    backBtn.style.visibility = currentIdx === 0 ? 'hidden' : 'visible';
+  }
+
+  function validateStep(stepNum) {
+    const required = stepRequiredFields[stepNum] || [];
+    const stepEl = getStepEl(stepNum);
+    if (!stepEl) return true;
+    let valid = true;
+    let firstBad = null;
+    required.forEach(function (name) {
+      const el = stepEl.querySelector('[name="' + name + '"]:not([type="hidden"])');
+      if (!el) return;
+      el.classList.remove('field-error');
+      let empty = !el.value.trim();
+      if (name === 'phone') {
+        const raw = el.value.replace(/\D/g, '');
+        empty = raw.length < 10;
+      }
+      if (empty) {
+        el.classList.add('field-error');
+        if (!firstBad) firstBad = el;
+        valid = false;
+      }
+    });
+    if (firstBad) firstBad.focus();
+    return valid;
+  }
+
+  function next() {
+    const order = getStepOrder();
+    const stepNum = order[currentIdx];
+    if (!validateStep(stepNum)) return;
+    if (currentIdx < order.length - 1) goTo(currentIdx + 1, 'forward');
+  }
+
+  function back() {
+    if (currentIdx > 0) goTo(currentIdx - 1, 'back');
+  }
+
+  // Wire up Next buttons
+  wizardForm.querySelectorAll('.wizard-next-btn').forEach(function (btn) {
+    btn.addEventListener('click', next);
+  });
+
+  // Back button
+  if (backBtn) backBtn.addEventListener('click', back);
+
+  // Choice buttons (auto-advance for big buttons, toggle for inline)
+  wizardForm.querySelectorAll('.wizard-choice-btn[data-radio]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      const radioName = btn.dataset.radio;
+      const val = btn.dataset.value;
+
+      // Update hidden radio inputs
+      wizardForm.querySelectorAll('input[name="' + radioName + '"]').forEach(function (r) {
+        r.checked = r.value === val;
+      });
+
+      if (radioName === 'has_spouse') {
+        hasSpouse = val === 'yes';
+        const spouseConditions = document.getElementById('spouse-conditions-wrap');
+        const spouseMed = document.getElementById('spouse-med-field');
+        if (spouseConditions) spouseConditions.hidden = !hasSpouse;
+        if (spouseMed) spouseMed.hidden = !hasSpouse;
+      }
+
+      if (radioName === 'has_children') {
+        const agesField = document.getElementById('children_ages_field');
+        if (agesField) agesField.hidden = val !== 'yes';
+        btn.closest('.wizard-inline-btns').querySelectorAll('.wizard-choice-btn').forEach(function (b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+        return;
+      }
+
+      if (radioName === 'spouse_smoker') {
+        btn.closest('.wizard-inline-btns').querySelectorAll('.wizard-choice-btn').forEach(function (b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+        return;
+      }
+
+      // Big buttons auto-advance
+      if (btn.closest('.wizard-big-btns')) {
+        btn.classList.add('selected');
+        setTimeout(next, 260);
+      }
+    });
+  });
+
+  // Condition toggle chips
+  wizardForm.querySelectorAll('.condition-toggle').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      const isSelected = btn.classList.toggle('selected');
+      const fieldName = btn.dataset.field;
+      const val = isSelected ? 'yes' : 'no';
+      wizardForm.querySelectorAll('input[name="' + fieldName + '"]').forEach(function (r) {
+        r.checked = r.value === val;
+      });
+    });
+  });
+
+  updateUI();
+})();
+
 /*
 === GOOGLE SHEETS SETUP INSTRUCTIONS ===
 
