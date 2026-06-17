@@ -378,7 +378,12 @@ select.form-input{cursor:pointer;background:var(--white)}
             <span class="phone-flag">🇺🇸</span>
             <input class="form-input" id="inp-phone" type="tel" placeholder="(555) 000-0000">
           </div>
+          <div id="phone-error" style="display:none;color:var(--red);font-size:12px;margin-top:5px;font-weight:700"></div>
         </div>
+        <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;margin-bottom:12px;font-size:13px;color:var(--text);line-height:1.4">
+          <input type="checkbox" id="phone-confirm" style="margin-top:2px;accent-color:var(--navy);width:16px;height:16px;flex-shrink:0">
+          I confirm this is a real mobile number where a licensed agent can reach me.
+        </label>
         <button class="cta-btn" id="submit-btn" onclick="handleSubmit()">See My Options &gt;&gt;</button>
         <p style="font-size:11px;color:var(--gray);margin-top:10px;line-height:1.5">
           &gt;&gt; By clicking the button above (See My Options) you agree to receive calls and/or text messages from LifeInsuranceCR and its licensed agents regarding mortgage protection plans. Msg &amp; data rates may apply.
@@ -652,10 +657,45 @@ document.getElementById('inp-phone').addEventListener('input',function(){
   this.value=v;
 });
 
+// Fake number detection
+function isFakeNumber(raw) {
+  if(raw.length !== 10) return true;
+  if(raw[0]==='0'||raw[0]==='1') return true;           // invalid area code start
+  if(/^(\d)\1{9}$/.test(raw)) return true;              // all same digit: 1111111111
+  if(raw==='1234567890'||raw==='0987654321') return true;
+  if(raw.slice(0,3)==='555'&&raw.slice(3,7)==='0100') return true; // classic 555 fake
+  if(/^555/.test(raw)&&/^5550/.test(raw.slice(0,4))) return true;
+  const sequential='0123456789012345678901234567890';
+  if(sequential.includes(raw)||sequential.split('').reverse().join('').includes(raw)) return true;
+  return false;
+}
+
 // Step 10: Submit
 async function handleSubmit(){
   const raw=document.getElementById('inp-phone').value.replace(/\D/g,'');
-  if(raw.length<10){document.getElementById('inp-phone').classList.add('error');return;}
+  const errEl=document.getElementById('phone-error');
+  const confirmed=document.getElementById('phone-confirm').checked;
+
+  errEl.style.display='none';
+  document.getElementById('inp-phone').classList.remove('error');
+
+  if(raw.length<10){
+    document.getElementById('inp-phone').classList.add('error');
+    errEl.textContent='Please enter a valid 10-digit phone number.';
+    errEl.style.display='block';
+    return;
+  }
+  if(isFakeNumber(raw)){
+    document.getElementById('inp-phone').classList.add('error');
+    errEl.textContent='Please enter a real phone number where an agent can reach you.';
+    errEl.style.display='block';
+    return;
+  }
+  if(!confirmed){
+    errEl.textContent='Please confirm this is a real number where you can be reached.';
+    errEl.style.display='block';
+    return;
+  }
   document.getElementById('inp-phone').classList.remove('error');
   lead.phone=document.getElementById('inp-phone').value.trim();
   lead.submittedAt=new Date().toISOString();
