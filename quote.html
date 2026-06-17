@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mortgage Protection Plans | LifeInsuranceCR</title>
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#0D1B40;
+  --navy-mid:#1a2f6e;
+  --navy-btn:#1e3a82;
+  --blue-bright:#4a9fd5;
+  --blue-light:#e8f2fb;
+  --blue-border:#a0c4e8;
+  --yellow:#f5c31e;
+  --yellow-hover:#e2b318;
+  --white:#fff;
+  --text:#1a1a1a;
+  --gray:#666;
+  --red:#e74c3c;
+  --green:#22c55e;
+}
+body{font-family:'Lato',sans-serif;background:var(--navy);color:var(--text);min-height:100vh}
+
+/* ── HEADER ── */
+.site-header{
+  background:var(--white);padding:10px 24px;
+  display:flex;align-items:center;justify-content:space-between;
+  box-shadow:0 1px 4px rgba(0,0,0,.15);
+  position:sticky;top:0;z-index:100;
+}
+.logo{font-size:20px;font-weight:900;color:var(--navy);letter-spacing:1.5px;text-transform:uppercase}
+.header-right{display:flex;align-items:center;gap:18px;font-size:13px}
+.trust-badge{display:flex;align-items:center;gap:5px;color:var(--gray)}
+.trust-badge svg{width:20px;height:20px;fill:var(--gray)}
+.support-link{color:var(--navy);font-weight:700;text-decoration:underline;cursor:pointer}
+
+/* ── HERO ── */
+.hero{background:var(--navy);padding:36px 16px 56px;display:flex;flex-direction:column;align-items:center;}
+
+/* ── FORM CARD ── */
+.form-card{
+  background:var(--white);border-radius:8px;
+  padding:24px 28px 18px;width:100%;max-width:480px;
+  box-shadow:0 6px 28px rgba(0,0,0,.35);
+}
+.card-title-bar{text-align:center;margin-bottom:18px}
+.card-title{font-size:22px;font-weight:900;color:var(--blue-bright);margin-bottom:2px}
+.card-subtitle{font-size:13px;color:var(--gray)}
+
+/* ── STEP DOTS ── */
+.step-dots{display:flex;justify-content:center;gap:5px;margin-bottom:14px}
+.dot{width:9px;height:9px;border-radius:50%;background:var(--blue-border);transition:background .2s}
+.dot.done{background:var(--navy)}
+.dot.active{background:var(--blue-bright)}
+
+/* ── QUESTION BOX ── */
+.question-box{border:2px dashed var(--blue-border);border-radius:6px;padding:20px 18px 18px;margin-bottom:10px;}
+.q-text{font-size:18px;font-weight:700;text-align:center;line-height:1.35;margin-bottom:6px}
+.q-sub{font-size:13px;color:var(--gray);text-align:center;margin-bottom:16px}
+.q-ready{font-size:15px;font-weight:700;color:var(--blue-bright);text-align:center;margin-bottom:6px}
+
+/* ── ANSWER BUTTONS ── */
+.ans-btn{
+  display:block;width:100%;
+  background:var(--navy);color:var(--white);
+  border:none;border-radius:4px;
+  padding:14px 16px;
+  font-family:'Lato',sans-serif;font-size:15px;font-weight:700;
+  text-align:center;cursor:pointer;margin-bottom:8px;
+  transition:background .15s,transform .1s;
+}
+.ans-btn:hover{background:var(--navy-btn)}
+.ans-btn:active{transform:scale(.99)}
+.ans-btn:last-child{margin-bottom:0}
+.ans-btn.selected{background:var(--blue-bright)}
+
+/* ── INPUTS ── */
+.form-group{margin-bottom:12px}
+.form-label{display:block;font-size:13px;font-weight:700;color:var(--text);margin-bottom:5px}
+.form-input{
+  width:100%;padding:12px 14px;
+  border:2px solid var(--blue-border);border-radius:4px;
+  font-family:'Lato',sans-serif;font-size:15px;
+  outline:none;transition:border-color .15s;
+}
+.form-input:focus{border-color:var(--blue-bright)}
+.form-input.error{border-color:var(--red)}
+select.form-input{cursor:pointer;background:var(--white)}
+.phone-wrap{position:relative}
+.phone-flag{position:absolute;left:12px;top:50%;transform:translateY(-50%);font-size:16px;pointer-events:none}
+.phone-wrap .form-input{padding-left:36px}
+
+/* ── CTA BUTTON ── */
+.cta-btn{
+  display:block;width:100%;
+  background:var(--yellow);color:var(--text);
+  border:none;border-radius:4px;padding:15px;
+  font-family:'Lato',sans-serif;font-size:17px;font-weight:900;
+  cursor:pointer;transition:background .15s;margin-top:10px;
+}
+.cta-btn:hover{background:var(--yellow-hover)}
+.cta-btn:disabled{opacity:.6;cursor:not-allowed}
+
+/* ── CARD BADGE ── */
+.card-badge{background:var(--blue-light);border-radius:4px;padding:9px 12px;text-align:center;font-size:13px;color:var(--navy);font-weight:700;}
+
+/* ── STATE WARNING ── */
+.state-warn{display:none;background:#fff3cd;border:1px solid #ffc107;border-radius:4px;padding:10px 12px;font-size:13px;color:#856404;margin-top:8px}
+
+/* ── STEPS ── */
+.step{display:none}.step.active{display:block}
+
+/* ── SPINNER ── */
+.spinner{display:inline-block;width:18px;height:18px;border:3px solid rgba(0,0,0,.2);border-top-color:var(--text);border-radius:50%;animation:spin .7s linear infinite;vertical-align:middle;margin-right:8px}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ══ BELOW-FOLD ══════════════════════════════════════════════ */
+
+.carriers-section{background:var(--navy);padding:10px 20px 44px;text-align:center;}
+.carriers-label{color:var(--blue-bright);font-size:13px;font-weight:700;letter-spacing:.5px;margin-bottom:18px;}
+.carrier-logos{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:28px;}
+.carrier-logo{color:rgba(255,255,255,.85);font-size:14px;font-weight:700;letter-spacing:.5px;}
+.carrier-logo.serif{font-family:Georgia,serif;font-style:italic}
+
+.protect-section{background:var(--white);padding:50px 24px;}
+.protect-inner{max-width:860px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start;}
+.protect-left h2{font-size:30px;font-weight:900;line-height:1.2;margin-bottom:8px;}
+.protect-left h2 span{color:var(--red)}
+.protect-right{display:flex;flex-direction:column;gap:16px}
+.protect-item{display:flex;align-items:center;gap:12px;font-size:15px;font-weight:700}
+.protect-icon{width:38px;height:38px;border-radius:50%;background:var(--blue-light);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
+
+.stats-section{background:var(--white);padding:0 24px 50px;border-top:1px solid #f0f0f0;}
+.stats-inner{max-width:860px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;}
+.stats-left{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.stat-badge{padding:14px 20px;border-radius:6px;font-size:24px;font-weight:900;color:var(--white);text-align:center;}
+.stat-badge.red{background:var(--red)}
+.stat-badge.yellow{background:var(--yellow);color:var(--text)}
+.stat-label{font-size:11px;font-weight:900;letter-spacing:1px;color:var(--gray);margin-top:4px}
+.arrow-icon{font-size:24px;color:var(--gray)}
+.stats-right h3{font-size:22px;font-weight:900;margin-bottom:10px}
+.stats-right p{font-size:14px;color:var(--gray);line-height:1.6}
+
+.trust-bar{background:var(--navy);padding:40px 24px;text-align:center;}
+.trust-bar-inner{max-width:860px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;}
+.trust-left h3{font-size:20px;font-weight:900;color:var(--white);margin-bottom:6px}
+.seen-in{font-size:12px;color:rgba(255,255,255,.6);margin-top:10px}
+.seen-logos{display:flex;gap:16px;align-items:center;margin-top:6px;flex-wrap:wrap}
+.seen-logo{color:rgba(255,255,255,.8);font-weight:700;font-size:14px}
+.seen-logo.box{border:1px solid rgba(255,255,255,.4);padding:2px 6px}
+.trust-right{text-align:center}
+.us-map{font-size:64px;line-height:1}
+
+.faq-section{background:var(--white);padding:50px 24px;}
+.faq-inner{max-width:680px;margin:0 auto}
+.faq-inner h2{font-size:24px;font-weight:900;text-align:center;margin-bottom:28px;}
+.faq-item{border-bottom:1px solid #e0e0e0;padding:16px 0;cursor:pointer;}
+.faq-q{font-size:15px;font-weight:700;display:flex;justify-content:space-between;align-items:center;}
+.faq-q .icon{font-size:20px;color:var(--navy);transition:transform .2s}
+.faq-item.open .faq-q .icon{transform:rotate(45deg)}
+.faq-a{display:none;font-size:14px;color:var(--gray);line-height:1.6;margin-top:10px;}
+.faq-item.open .faq-a{display:block}
+.faq-cta{text-align:center;margin-top:32px}
+.faq-cta-btn{display:inline-block;background:var(--yellow);color:var(--text);border:none;border-radius:4px;padding:15px 36px;font-family:'Lato',sans-serif;font-size:17px;font-weight:900;cursor:pointer;transition:background .15s;}
+.faq-cta-btn:hover{background:var(--yellow-hover)}
+
+.site-footer{background:var(--navy);padding:40px 24px;}
+.footer-inner{max-width:860px;margin:0 auto;display:grid;grid-template-columns:auto 1fr;gap:32px;align-items:start;}
+.footer-logo-area h3{font-size:18px;font-weight:900;color:var(--white);letter-spacing:1px}
+.footer-divider{width:60px;height:2px;background:var(--blue-bright);margin:8px 0}
+.footer-text{font-size:11px;color:rgba(255,255,255,.5);line-height:1.7}
+.footer-links{display:flex;gap:16px;margin-top:20px;border-top:1px solid rgba(255,255,255,.1);padding-top:16px;}
+.footer-links a{font-size:12px;color:rgba(255,255,255,.6);text-decoration:underline;cursor:pointer}
+
+/* ── SUCCESS PAGE ── */
+.success-page{display:none;background:#f0f5ff;min-height:100vh;}
+.success-page.active{display:block}
+.success-header{background:var(--white);padding:14px 24px;text-align:center;border-bottom:1px solid #e0e8f5;}
+.success-header .logo{display:inline-block}
+.success-body{max-width:860px;margin:0 auto;padding:48px 24px;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;}
+.confirmed-badge{display:inline-flex;align-items:center;gap:6px;background:#dcfce7;color:#16a34a;font-size:13px;font-weight:700;padding:6px 12px;border-radius:20px;margin-bottom:20px}
+.success-headline{font-size:42px;font-weight:900;line-height:1.1;color:var(--navy);margin-bottom:16px}
+.success-headline span{color:var(--blue-bright)}
+.success-desc{font-size:15px;color:#444;line-height:1.6;margin-bottom:24px}
+.next-step-label{font-size:16px;font-weight:900;color:var(--blue-bright);margin-bottom:8px;letter-spacing:.5px}
+.next-step-text{font-size:14px;color:#555;margin-bottom:20px}
+.what-youll-get{background:var(--navy);border-radius:10px;padding:20px 24px;}
+.wyg-icon{font-size:28px;margin-bottom:8px}
+.wyg-title{font-size:14px;font-weight:900;color:var(--white);margin-bottom:6px}
+.wyg-text{font-size:13px;color:rgba(255,255,255,.75);line-height:1.6}
+.wyg-text strong{color:var(--blue-bright)}
+.after-hours{font-size:13px;color:#888;margin-top:16px}
+.after-hours strong{color:#555}
+.phone-mockup{background:var(--white);border-radius:20px;padding:20px;box-shadow:0 8px 32px rgba(0,0,0,.15);border:2px solid #e8ecf5;}
+.mock-header{display:flex;align-items:center;gap:12px;margin-bottom:20px;padding-bottom:14px;border-bottom:1px solid #f0f0f0}
+.mock-avatar{width:44px;height:44px;border-radius:50%;background:var(--navy);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:900;color:var(--white);flex-shrink:0}
+.mock-name{font-weight:900;font-size:15px}
+.mock-status{font-size:12px;color:var(--green);font-weight:700}
+.mock-bubble{background:#f0f5ff;border-radius:12px 12px 12px 2px;padding:14px 16px;font-size:13px;line-height:1.6;color:#333;margin-bottom:10px}
+.mock-time{font-size:11px;color:#999;text-align:center}
+.mock-typing{display:flex;gap:4px;align-items:center;justify-content:flex-start;padding:8px 0}
+.mock-typing span{width:8px;height:8px;border-radius:50%;background:var(--blue-border);animation:bounce .8s infinite}
+.mock-typing span:nth-child(2){animation-delay:.15s}
+.mock-typing span:nth-child(3){animation-delay:.3s}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+.success-footer{background:var(--navy);padding:28px 24px;text-align:center;}
+.success-footer p{font-size:11px;color:rgba(255,255,255,.45);line-height:1.7;max-width:700px;margin:0 auto}
+
+@media(max-width:600px){
+  .protect-inner,.stats-inner,.trust-bar-inner,.footer-inner,.success-body{grid-template-columns:1fr}
+  .form-card{padding:20px 16px 14px}
+  .q-text{font-size:16px}
+  .card-title{font-size:19px}
+  .success-headline{font-size:30px}
+}
+</style>
+</head>
+<body>
+
+<!-- ── MAIN FLOW ── -->
+<div id="mainFlow">
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="logo">LifeInsuranceCR</div>
+  <div class="header-right">
+    <div class="trust-badge">
+      <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.5 3.8 10.7 9 12 5.2-1.3 9-6.5 9-12V5l-9-4zm-2 16l-4-4 1.4-1.4L10 14.2l6.6-6.6L18 9l-8 8z"/></svg>
+      <span>Accredited Business</span>
+    </div>
+    <a class="support-link">Email Client Support</a>
+  </div>
+</header>
+
+<!-- HERO + FORM -->
+<section class="hero">
+  <div class="form-card">
+    <div class="card-title-bar">
+      <div class="card-title">Mortgage Protection Plans</div>
+      <div class="card-subtitle">Easy 3-Minute Application</div>
+    </div>
+    <div class="step-dots" id="stepDots"></div>
+
+    <!-- ══ STEP 1: ZIP ══ -->
+    <div class="step active" id="step-1">
+      <div class="question-box">
+        <div class="q-text">Enter your zip code to begin...</div>
+        <div class="q-sub">(Policy availability varies by state.)</div>
+        <div class="form-group">
+          <label class="form-label">Zip Code</label>
+          <input class="form-input" id="inp-zip" type="tel" maxlength="5" placeholder="*Example: 90210">
+        </div>
+        <div class="state-warn" id="zip-warn">⚠️ Coverage may be limited in your area. We'll do our best to find options for you.</div>
+        <button class="cta-btn" onclick="handleZip()">Get Started</button>
+      </div>
+      <div class="card-badge">✔ Simple process that guides your search for the right policy</div>
+    </div>
+
+    <!-- ══ STEP 2: LOAN AMOUNT ══ -->
+    <div class="step" id="step-2">
+      <div class="question-box">
+        <div class="q-text">What is the total amount owed on your home?</div>
+        <button class="ans-btn" onclick="pick('mortgageLoanAmount','Less than $250,000')">Less than $250,000</button>
+        <button class="ans-btn" onclick="pick('mortgageLoanAmount','$250,000 to $500,000')">$250,000 to $500,000</button>
+        <button class="ans-btn" onclick="pick('mortgageLoanAmount','$500,000 to $1,000,000')">$500,000 to $1,000,000</button>
+        <button class="ans-btn" onclick="pick('mortgageLoanAmount','Over $1,000,000')">Over $1,000,000 owed</button>
+      </div>
+      <div class="card-badge">✔ Simple process that guides your search for the right policy</div>
+    </div>
+
+    <!-- ══ STEP 3: BENEFICIARY ══ -->
+    <div class="step" id="step-3">
+      <div class="question-box">
+        <div class="q-text">Who will your policy payout to?</div>
+        <div class="q-sub">(your beneficiary)</div>
+        <button class="ans-btn" onclick="pick('beneficiary','Husband or Wife')">Husband or Wife</button>
+        <button class="ans-btn" onclick="pick('beneficiary','Son, Daughter, Step-Child')">Son, Daughter, Step-Child</button>
+        <button class="ans-btn" onclick="pick('beneficiary','Grandchildren')">Grandchildren</button>
+        <button class="ans-btn" onclick="pick('beneficiary','Other Relative or Friend')">Other Relative or Friend</button>
+        <button class="ans-btn" onclick="pick('beneficiary','Other')">Other</button>
+      </div>
+      <div class="card-badge">✔ Simple process that guides your search for the right policy</div>
+    </div>
+
+    <!-- ══ STEP 4: GENDER ══ -->
+    <div class="step" id="step-4">
+      <div class="question-box">
+        <div class="q-text">What is your gender?</div>
+        <button class="ans-btn" onclick="pick('clientGender','Male')">Male</button>
+        <button class="ans-btn" onclick="pick('clientGender','Female')">Female</button>
+      </div>
+      <div class="card-badge">✔ Simple process that guides your search for the right policy</div>
+    </div>
+
+    <!-- ══ STEP 5: AGE ══ -->
+    <div class="step" id="step-5">
+      <div class="question-box">
+        <div class="q-text">What is your age?</div>
+        <div class="q-sub">(We offer coverage for ages 18 to 79!)</div>
+        <div class="form-group">
+          <label class="form-label">Age</label>
+          <input class="form-input" id="inp-age" type="number" min="18" max="79" placeholder="e.g. 35">
+        </div>
+        <button class="cta-btn" onclick="handleAge()">Next</button>
+      </div>
+      <div class="card-badge">✔ Simple process that guides your search for the right policy</div>
+    </div>
+
+    <!-- ══ STEP 6: TOBACCO ══ -->
+    <div class="step" id="step-6">
+      <div class="question-box">
+        <div class="q-text">Have you used tobacco products in the last 12 months?</div>
+        <button class="ans-btn" onclick="pick('clientSmoker','yes')">Yes</button>
+        <button class="ans-btn" onclick="pick('clientSmoker','no')">No</button>
+      </div>
+      <div class="card-badge">✔ Simple process that guides your search for the right policy</div>
+    </div>
+
+    <!-- ══ STEP 7: HEALTH ══ -->
+    <div class="step" id="step-7">
+      <div class="question-box">
+        <div class="q-text">Any major health concerns in the last 5 years?</div>
+        <div class="q-sub">(select all that apply)</div>
+        <button class="ans-btn health-toggle" data-val="None" onclick="toggleHealth(this)">No health concerns</button>
+        <button class="ans-btn health-toggle" data-val="Heart Condition" onclick="toggleHealth(this)">Heart Condition</button>
+        <button class="ans-btn health-toggle" data-val="Cancer" onclick="toggleHealth(this)">Cancer</button>
+        <button class="ans-btn health-toggle" data-val="Diabetes" onclick="toggleHealth(this)">Diabetes</button>
+        <button class="ans-btn health-toggle" data-val="High Blood Pressure" onclick="toggleHealth(this)">High Blood Pressure</button>
+        <button class="ans-btn health-toggle" data-val="Other" onclick="toggleHealth(this)">Other</button>
+        <button class="cta-btn" style="margin-top:14px" onclick="handleHealth()">Continue →</button>
+      </div>
+      <div class="card-badge">✔ Simple process that guides your search for the right policy</div>
+    </div>
+
+    <!-- ══ STEP 8: NAME ══ -->
+    <div class="step" id="step-8">
+      <div class="question-box">
+        <div class="q-text">What is your first and last name?</div>
+        <div class="q-sub">(For your personalized quotes!)</div>
+        <div class="form-group">
+          <label class="form-label">First Name</label>
+          <input class="form-input" id="inp-fname" type="text" placeholder="*Example: John">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Last Name</label>
+          <input class="form-input" id="inp-lname" type="text" placeholder="*Example: Smith">
+        </div>
+        <button class="cta-btn" onclick="handleName()">Next</button>
+      </div>
+      <div class="card-badge">✔ Simple process that guides your search for the right policy</div>
+    </div>
+
+    <!-- ══ STEP 9: EMAIL ══ -->
+    <div class="step" id="step-9">
+      <div class="question-box">
+        <div class="q-text">What is your email address?</div>
+        <div class="q-sub">Please make sure your email is correct.</div>
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <input class="form-input" id="inp-email" type="email" placeholder="*Example: name@domain.com">
+        </div>
+        <button class="cta-btn" onclick="handleEmail()">Next</button>
+      </div>
+      <div class="card-badge">✔ We hate SPAM and promise to keep your email private!</div>
+    </div>
+
+    <!-- ══ STEP 10: PHONE ══ -->
+    <div class="step" id="step-10">
+      <div class="question-box">
+        <div class="q-ready">Your plans are ready!</div>
+        <div class="q-text">Enter your phone number...</div>
+        <div class="form-group">
+          <label class="form-label">Phone Number</label>
+          <div class="phone-wrap">
+            <span class="phone-flag">🇺🇸</span>
+            <input class="form-input" id="inp-phone" type="tel" placeholder="(555) 000-0000">
+          </div>
+        </div>
+        <button class="cta-btn" id="submit-btn" onclick="handleSubmit()">See My Options &gt;&gt;</button>
+        <p style="font-size:11px;color:var(--gray);margin-top:10px;line-height:1.5">
+          &gt;&gt; By clicking the button above (See My Options) you agree to receive calls and/or text messages from LifeInsuranceCR and its licensed agents regarding mortgage protection plans. Msg &amp; data rates may apply.
+        </p>
+      </div>
+      <div class="card-badge">✔ Use a mobile number so we can reach you with your options.</div>
+    </div>
+
+  </div><!-- /form-card -->
+</section>
+
+<!-- CARRIER LOGOS -->
+<section class="carriers-section">
+  <div class="carriers-label">Easily compare options from leading carriers</div>
+  <div class="carrier-logos">
+    <div class="carrier-logo">FG</div>
+    <div class="carrier-logo serif">Foresters Financial</div>
+    <div class="carrier-logo">AMERICAN AMICABLE</div>
+    <div class="carrier-logo serif">Mutual of Omaha</div>
+    <div class="carrier-logo serif">John Hancock</div>
+    <div class="carrier-logo" style="letter-spacing:2px">SBLI</div>
+    <div class="carrier-logo" style="letter-spacing:2px">AMERICO</div>
+  </div>
+</section>
+
+<!-- PROTECT SECTION -->
+<section class="protect-section">
+  <div class="protect-inner">
+    <div class="protect-left">
+      <h2>Protect your home and family from the <span>unexpected...</span></h2>
+    </div>
+    <div class="protect-right">
+      <div class="protect-item"><div class="protect-icon">🛡️</div><span>Diagnosis of a Critical Illness</span></div>
+      <div class="protect-item"><div class="protect-icon">🛡️</div><span>Becoming Disabled From Illness/Injury</span></div>
+      <div class="protect-item"><div class="protect-icon">🛡️</div><span>Passing Away</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS SECTION -->
+<section class="stats-section">
+  <div class="stats-inner">
+    <div class="stats-left">
+      <div><div class="stat-badge red">50%</div><div class="stat-label">FORECLOSURES</div></div>
+      <div class="arrow-icon">→</div>
+      <div><div class="stat-badge yellow">60%+</div><div class="stat-label">BANKRUPTCIES</div></div>
+    </div>
+    <div class="stats-right">
+      <h3>Medical crises often cause financial crises</h3>
+      <p>Studies have shown that up to 50% of mortgage foreclosures and more than 60% of personal bankruptcies are linked to medical debts from illnesses or injuries.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<section class="trust-bar">
+  <div class="trust-bar-inner">
+    <div class="trust-left">
+      <h3>LIFEINSURANCECR</h3>
+      <div class="footer-divider"></div>
+      <p style="font-size:13px;color:var(--blue-bright)">Helping families protect what matters most</p>
+      <div class="seen-in">As seen in</div>
+      <div class="seen-logos">
+        <div class="seen-logo" style="font-style:italic;font-family:Georgia,serif">Forbes</div>
+        <div class="seen-logo" style="font-family:Georgia,serif">Chicago Tribune</div>
+        <div class="seen-logo box">AP</div>
+      </div>
+    </div>
+    <div class="trust-right">
+      <div class="us-map">🗺️</div>
+      <p style="color:rgba(255,255,255,.75);margin-top:8px;font-size:14px">Offering affordable coverage nationwide!</p>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section">
+  <div class="faq-inner">
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq-item" onclick="this.classList.toggle('open')">
+      <div class="faq-q">What is Mortgage Protection Insurance? <span class="icon">+</span></div>
+      <div class="faq-a">Mortgage protection insurance is an affordable term life insurance policy designed to cover your mortgage if you pass away or experience a qualifying health event, ensuring your family can stay in their home.</div>
+    </div>
+    <div class="faq-item" onclick="this.classList.toggle('open')">
+      <div class="faq-q">Who receives payouts from my policy? <span class="icon">+</span></div>
+      <div class="faq-a">If you pass away, the benefit goes to your named beneficiary to pay off the mortgage. If you trigger a living benefit — like a critical illness diagnosis — <em>you</em> receive the payout directly while you're still alive.</div>
+    </div>
+    <div class="faq-item" onclick="this.classList.toggle('open')">
+      <div class="faq-q">Are mortgage protection quotes free? <span class="icon">+</span></div>
+      <div class="faq-a">Yes — completely free with no purchase obligation. A licensed agent will walk you through your options with zero pressure.</div>
+    </div>
+    <div class="faq-item" onclick="this.classList.toggle('open')">
+      <div class="faq-q">Can I apply if I have a health condition? <span class="icon">+</span></div>
+      <div class="faq-a">Most likely, yes. Many carriers offer policies for people with pre-existing conditions. A licensed agent will find the best available plan for your situation.</div>
+    </div>
+    <div class="faq-cta">
+      <button class="faq-cta-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})">See My Options</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-logo-area">
+      <h3>LIFEINSURANCECR</h3>
+      <div class="footer-divider"></div>
+      <p style="font-size:12px;color:var(--blue-bright)">Protecting families nationwide</p>
+    </div>
+    <div>
+      <p class="footer-text">By providing your information and/or utilizing the service on this website, you agree to this website's Privacy Policy and Terms & Conditions and you consent to be contacted by a licensed insurance agent via email, telephone calls, text messages, or SMS. Message & data rates may apply. Coverage is subject to underwriting approval. Not available in all states. Premiums vary based on age, health, and coverage amount.</p>
+      <div class="footer-links">
+        <a href="/terms.html">Terms &amp; Conditions</a>
+        <a href="/privacy-policy.html">Privacy Policy</a>
+        <a href="#">License</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</div><!-- /mainFlow -->
+
+<!-- ══ SUCCESS PAGE ══ -->
+<div class="success-page" id="successPage">
+  <div class="success-header">
+    <div class="logo">LifeInsuranceCR</div>
+  </div>
+  <div class="success-body">
+    <div>
+      <div class="confirmed-badge">✅ REQUEST CONFIRMED</div>
+      <div class="success-headline">You're<br><span>Pre-Qualified!</span></div>
+      <p class="success-desc">Next, a licensed agent will reach out shortly to walk you through your options — <strong>clearly and simply.</strong></p>
+      <div class="next-step-label">NEXT STEP:</div>
+      <p class="next-step-text">Watch for a text or call in the next few minutes to finish your personalized quote.</p>
+      <div class="what-youll-get">
+        <div class="wyg-icon">📋</div>
+        <div class="wyg-title">What You'll Get</div>
+        <p class="wyg-text">Compare plans and pricing from top-rated carriers — including benefits you can actually use <strong>while you're living.</strong></p>
+      </div>
+      <p class="after-hours"><strong>Submitted after hours?</strong> Your licensed agent may text you the next business day.</p>
+    </div>
+    <div class="phone-mockup">
+      <div class="mock-header">
+        <div class="mock-avatar">JR</div>
+        <div>
+          <div class="mock-name">Your Licensed Agent</div>
+          <div class="mock-status">● Active now</div>
+        </div>
+      </div>
+      <div class="mock-bubble">Hi <span id="mock-name">there</span>, this is your licensed agent from LifeInsuranceCR. I'm working on completing your mortgage protection quote. It takes just a few quick questions to gather the best options for you.</div>
+      <div class="mock-time">Just now</div>
+      <div class="mock-typing"><span></span><span></span><span></span></div>
+    </div>
+  </div>
+  <div class="success-footer">
+    <p>Coverage is subject to underwriting approval. Not available in all states. Premiums vary based on age, health, and coverage amount. LifeInsuranceCR and its agents are licensed insurance professionals. By submitting this form you consented to be contacted by a licensed agent.</p>
+  </div>
+</div>
+
+<script>
+const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbzPCAxJYmvJsMFZ_o6WzdihrjdEz_7MnxQzhmMbmDK0yaDniJmIFbSoLYcxFe9dxzUy8g/exec';
+const LICENSED   = ['NJ','IA','VA','WA','OH','AZ','TX','AR','GA','AL'];
+const TOTAL_STEPS = 10;
+let currentStep = 1;
+
+const lead = {
+  zipCode:'',state:'',mortgageLoanAmount:'',beneficiary:'',clientGender:'',
+  clientAge:'',clientSmoker:'',clientMedicalConcerns:'',
+  clientName:'',clientFirstName:'',clientLastName:'',
+  email:'',phone:'',
+  source:'lifeinsurancecr.com/quote',formLocation:'quote',submittedAt:'',
+};
+
+function buildDots() {
+  const c = document.getElementById('stepDots');
+  c.innerHTML = '';
+  for (let i=1;i<=TOTAL_STEPS;i++){
+    const d=document.createElement('div');
+    d.className='dot'+(i<currentStep?' done':i===currentStep?' active':'');
+    c.appendChild(d);
+  }
+}
+
+function goToStep(n) {
+  document.getElementById('step-'+currentStep).classList.remove('active');
+  currentStep=n;
+  document.getElementById('step-'+n).classList.add('active');
+  buildDots();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function pick(key,val){lead[key]=val;goToStep(currentStep+1);}
+
+// Step 1: ZIP
+async function handleZip(){
+  const z=document.getElementById('inp-zip').value.trim();
+  if(!/^\d{5}$/.test(z)){document.getElementById('inp-zip').classList.add('error');return;}
+  document.getElementById('inp-zip').classList.remove('error');
+  lead.zipCode=z;
+  try{
+    const r=await fetch(`https://api.zippopotam.us/us/${z}`);
+    if(r.ok){const d=await r.json();const st=d.places[0]['state abbreviation'];lead.state=st;if(!LICENSED.includes(st))document.getElementById('zip-warn').style.display='block';}
+  }catch(e){}
+  goToStep(2);
+}
+document.getElementById('inp-zip').addEventListener('keydown',e=>{if(e.key==='Enter')handleZip();});
+
+// Step 5: Age
+function handleAge(){
+  const a=parseInt(document.getElementById('inp-age').value);
+  if(!a||a<18||a>79){document.getElementById('inp-age').classList.add('error');return;}
+  document.getElementById('inp-age').classList.remove('error');
+  lead.clientAge=String(a);
+  goToStep(6);
+}
+document.getElementById('inp-age').addEventListener('keydown',e=>{if(e.key==='Enter')handleAge();});
+
+// Step 7: Health toggles
+const healthSelected=new Set();
+function toggleHealth(btn){
+  const v=btn.dataset.val;
+  if(v==='None'){
+    healthSelected.clear();
+    document.querySelectorAll('.health-toggle').forEach(b=>{b.style.background='';b.style.opacity='1';});
+    healthSelected.add('None');
+    btn.style.background='var(--blue-bright)';
+    document.querySelectorAll('.health-toggle').forEach(b=>{if(b!==btn){b.style.opacity='.5';}});
+    return;
+  }
+  healthSelected.delete('None');
+  const nb=document.querySelector('.health-toggle[data-val="None"]');
+  if(nb){nb.style.background='';nb.style.opacity='1';}
+  if(healthSelected.has(v)){healthSelected.delete(v);btn.style.background='';}
+  else{healthSelected.add(v);btn.style.background='var(--blue-bright)';}
+}
+function handleHealth(){
+  lead.clientMedicalConcerns=healthSelected.size?[...healthSelected].join(', '):'None';
+  goToStep(8);
+}
+
+// Step 8: Name
+function handleName(){
+  const fn=document.getElementById('inp-fname').value.trim();
+  const ln=document.getElementById('inp-lname').value.trim();
+  if(!fn){document.getElementById('inp-fname').classList.add('error');}
+  if(!ln){document.getElementById('inp-lname').classList.add('error');}
+  if(!fn||!ln)return;
+  document.getElementById('inp-fname').classList.remove('error');
+  document.getElementById('inp-lname').classList.remove('error');
+  lead.clientFirstName=fn;lead.clientLastName=ln;lead.clientName=fn+' '+ln;
+  goToStep(9);
+}
+['inp-fname','inp-lname'].forEach(id=>document.getElementById(id).addEventListener('keydown',e=>{if(e.key==='Enter')handleName();}));
+
+// Step 9: Email
+function handleEmail(){
+  const e=document.getElementById('inp-email').value.trim();
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e)){document.getElementById('inp-email').classList.add('error');return;}
+  document.getElementById('inp-email').classList.remove('error');
+  lead.email=e;
+  goToStep(10);
+}
+document.getElementById('inp-email').addEventListener('keydown',e=>{if(e.key==='Enter')handleEmail();});
+
+// Phone format
+document.getElementById('inp-phone').addEventListener('input',function(){
+  let v=this.value.replace(/\D/g,'');
+  if(v.length>=10)v=`(${v.slice(0,3)}) ${v.slice(3,6)}-${v.slice(6,10)}`;
+  else if(v.length>6)v=`(${v.slice(0,3)}) ${v.slice(3,6)}-${v.slice(6)}`;
+  else if(v.length>3)v=`(${v.slice(0,3)}) ${v.slice(3)}`;
+  this.value=v;
+});
+
+// Step 10: Submit
+async function handleSubmit(){
+  const raw=document.getElementById('inp-phone').value.replace(/\D/g,'');
+  if(raw.length<10){document.getElementById('inp-phone').classList.add('error');return;}
+  document.getElementById('inp-phone').classList.remove('error');
+  lead.phone=document.getElementById('inp-phone').value.trim();
+  lead.submittedAt=new Date().toISOString();
+
+  const btn=document.getElementById('submit-btn');
+  btn.disabled=true;
+  btn.innerHTML='<span class="spinner"></span>Processing...';
+
+  if(typeof fbq==='function')fbq('track','Lead');
+
+  try{
+    await fetch(SHEETS_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(lead)});
+  }catch(e){}
+
+  // Show success page
+  document.getElementById('mainFlow').style.display='none';
+  const sp=document.getElementById('successPage');
+  sp.classList.add('active');
+  const mn=document.getElementById('mock-name');
+  if(mn)mn.textContent=lead.clientFirstName||'there';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+buildDots();
+</script>
+
+<!-- Meta Pixel -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init','1540270144429807');
+fbq('track','PageView');
+</script>
+</body>
+</html>
