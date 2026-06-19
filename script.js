@@ -1,4 +1,5 @@
 const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbzPCAxJYmvJsMFZ_o6WzdihrjdEz_7MnxQzhmMbmDK0yaDniJmIFbSoLYcxFe9dxzUy8g/exec';
+const RENDER_URL = 'https://licr-web.onrender.com/lead';
 
 // --- Navbar scroll effect ---
 const navbar = document.getElementById('navbar');
@@ -191,6 +192,18 @@ async function submitToSheets(payload) {
   // no-cors means we can't read the response, but data is sent
 }
 
+async function submitToRender(payload) {
+  try {
+    await fetch(RENDER_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+  } catch (err) {
+    console.warn('Render notification failed (non-blocking):', err);
+  }
+}
+
 // --- Handle form submission ---
 async function handleFormSubmit(e) {
   e.preventDefault();
@@ -220,7 +233,7 @@ async function handleFormSubmit(e) {
 
   try {
     const payload = buildPayload(form);
-    await submitToSheets(payload);
+    await Promise.all([submitToSheets(payload), submitToRender(payload)]);
 
     form.hidden = true;
     if (successEl) successEl.hidden = false;
